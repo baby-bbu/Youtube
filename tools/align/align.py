@@ -1,6 +1,6 @@
 """Matches each shot's text to the spoken words and writes timeline.json.
 
-Usage: python3 tools/align/align.py shots.json words.json voice.wav out.json
+Usage: python3 tools/align/align.py shots.json words.json voice.wav out.json [voice_name_in_timeline]
 
 Matching ignores case and punctuation and tolerates small ad-libs: the whole script is
 lined up against the whole transcript in order, then each shot takes the time of the
@@ -84,11 +84,11 @@ def align(shots, words, duration):
     return out
 
 
-def main(shots_path, words_path, voice, out_path):
+def main(shots_path, words_path, voice, out_path, voice_name=None):
     shots = json.load(open(shots_path))["shots"]
     words = json.load(open(words_path))
     duration = audio_seconds(voice)
-    timeline = {"fps": 30, "width": 1080, "height": 1920, "voice": voice,
+    timeline = {"fps": 30, "width": 1080, "height": 1920, "voice": voice_name or voice,
                 "duration": round(duration, 2), "seed": 1234,
                 "shots": align(shots, words, duration)}
     json.dump(timeline, open(out_path, "w"), indent=2)
@@ -96,4 +96,4 @@ def main(shots_path, words_path, voice, out_path):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:5])
+    main(*sys.argv[1:6])

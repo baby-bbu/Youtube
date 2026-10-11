@@ -130,6 +130,29 @@ const DRAW: Record<PropName, (p: DrawProps) => ReactNode> = {
       <path d="M150 20 l22 22 l-52 52 l-26 6 l6 -26 Z" fill={PAL.yellow} />
     </g>
   ),
+  couch: () => (
+    <g {...line}>
+      <rect x="34" y="52" width="132" height="70" rx="22" fill="#5B8DEF" />
+      <rect x="14" y="88" width="34" height="68" rx="16" fill="#4A78D8" />
+      <rect x="152" y="88" width="34" height="68" rx="16" fill="#4A78D8" />
+      <rect x="40" y="104" width="120" height="48" rx="14" fill="#6FA0FF" />
+      <path d="M100 106 V150" fill="none" strokeWidth={THIN_PX} />
+      <path d="M38 156 v16 M162 156 v16" fill="none" />
+      <path d="M78 34 h22 l-22 20 h22" fill="none" strokeWidth={THIN_PX} />
+      <path d="M118 22 h16 l-16 14 h16" fill="none" strokeWidth={THIN_PX} />
+    </g>
+  ),
+  phone: () => (
+    <g {...line}>
+      <rect x="56" y="12" width="88" height="176" rx="18" fill="#2A2A2A" />
+      <rect x="66" y="30" width="68" height="132" rx="6" fill={PAL.sky} strokeWidth={THIN_PX} />
+      <circle cx="86" cy="86" r="6" fill={INK} stroke="none" />
+      <circle cx="114" cy="86" r="6" fill={INK} stroke="none" />
+      <path d="M82 112 q18 16 36 -2" fill="none" strokeWidth={THIN_PX} />
+      <circle cx="140" cy="28" r="17" fill={PAL.red} />
+      <text x="140" y="35" textAnchor="middle" fontFamily={CAPTION_FONT} fontWeight={900} fontSize="20" fill="#fff" stroke="none">9</text>
+    </g>
+  ),
   sparkle: () => (
     <path {...line} d="M100 14 C108 68 132 92 186 100 C132 108 108 132 100 186 C92 132 68 108 14 100 C68 92 92 68 100 14 Z" fill={PAL.yellow} />
   ),

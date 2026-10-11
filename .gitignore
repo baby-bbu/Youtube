@@ -20,3 +20,6 @@ remotion/public/fixtures/
 # Generated working copies for rendering
 remotion/public/work/
 remotion/out/
+
+# Per-video intermediate files made by tools/make.py
+videos/*/work/
