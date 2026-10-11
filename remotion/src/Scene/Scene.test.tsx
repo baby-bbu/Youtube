@@ -3,7 +3,8 @@ import { describe, expect, test } from 'vitest';
 import sample from '../../fixtures/timeline.sample.json';
 import { parseTimeline } from '../timeline';
 import { Label } from './Label';
-import { Scene } from './Scene';
+import { GUY_SCALE, GUY_TOP } from '../Guy/layout';
+import { Scene, TITLE_CARD_TOP } from './Scene';
 
 const shot = parseTimeline(JSON.parse(JSON.stringify(sample))).shots[0];
 
@@ -31,6 +32,21 @@ describe('Scene', () => {
       <Scene shot={{ ...shot, image: undefined, label: undefined }} progress={0} />,
     );
     expect(html).toContain('RUNDOWN');
+  });
+});
+
+describe('title card layout', () => {
+  test("the card's word sits in a band the character never covers", () => {
+    // 200px text starting at TITLE_CARD_TOP must end above the top of the character's cap
+    expect(TITLE_CARD_TOP + 200).toBeLessThan(GUY_TOP + 17 * GUY_SCALE);
+    const html = renderToStaticMarkup(<Scene shot={{ ...shot, image: undefined }} progress={0} />);
+    expect(html).toContain(`padding-top:${TITLE_CARD_TOP}px`);
+  });
+
+  test('the card is centred inside the safe box, not on the whole frame', () => {
+    const html = renderToStaticMarkup(<Scene shot={{ ...shot, image: undefined }} progress={0} />);
+    expect(html).toContain('padding-left:90px');
+    expect(html).toContain('padding-right:180px');
   });
 });
 

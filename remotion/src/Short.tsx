@@ -15,12 +15,11 @@ import { Guy } from './Guy/Guy';
 import { GUY_SCALE, guyLayout } from './Guy/layout';
 import { guyPose } from './Guy/motion';
 import { Label } from './Scene/Label';
+import { shouldShowLabel } from './Scene/labelWindow';
 import { Scene } from './Scene/Scene';
 import { slideOffset, transitionFrames } from './Scene/transitions';
 import { parseTimeline, shotAt } from './timeline';
 import type { Timeline, Transition } from './types';
-
-const LABEL_SECONDS = 1.0;
 
 function incomingStyle(kind: Transition, p: number, width: number): CSSProperties {
   switch (kind) {
@@ -81,7 +80,7 @@ export const Short: React.FC<Timeline> = (rawProps) => {
       >
         <Scene shot={shot} progress={progress} />
       </AbsoluteFill>
-      {shot.label && t - shot.start < LABEL_SECONDS && <Label text={shot.label} />}
+      {shot.label && shouldShowLabel(shot, t) && <Label text={shot.label} />}
       <div style={{ position: 'absolute', left: guy.left, top: guy.top }}>
         <Guy pose={pose} sticker scale={GUY_SCALE} />
       </div>

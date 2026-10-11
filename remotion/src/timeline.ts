@@ -16,6 +16,9 @@ export class TimelineError extends Error {
   }
 }
 
+/** Slack in seconds for words that straddle a boundary by rounding. */
+const EPS = 0.05;
+
 type Obj = Record<string, unknown>;
 
 const isObj = (v: unknown): v is Obj => typeof v === 'object' && v !== null && !Array.isArray(v);
@@ -60,6 +63,14 @@ function parseShot(raw: unknown, index: number): Shot {
   const character = raw.character;
   if (!isObj(character)) throw new TimelineError(`${ctx}: "character" must be an object`);
   if (!Array.isArray(raw.words)) throw new TimelineError(`${ctx}: "words" must be an array`);
+  const words = raw.words.map((w) => parseWord(w, ctx));
+  for (const w of words) {
+    if (w.start < start - EPS || w.end > end + EPS) {
+      throw new TimelineError(
+        `${ctx}: word "${w.word}" is outside the shot (${w.start}-${w.end}, shot runs ${start}-${end})`,
+      );
+    }
+  }
   const shot: Shot = {
     id,
     role: oneOf(ROLES, raw.role, 'role', ctx),
@@ -71,7 +82,7 @@ function parseShot(raw: unknown, index: number): Shot {
     },
     transition: oneOf(TRANSITIONS, raw.transition, 'transition', ctx),
     camera: oneOf(CAMERAS, raw.camera, 'camera', ctx),
-    words: raw.words.map((w) => parseWord(w, ctx)),
+    words,
   };
   if (typeof raw.label === 'string') shot.label = raw.label;
   if (typeof raw.image === 'string') shot.image = raw.image;
@@ -88,7 +99,29 @@ export function parseTimeline(raw: unknown): Timeline {
   if (!Array.isArray(raw.shots) || raw.shots.length === 0) {
     throw new TimelineError('timeline: "shots" must be a non-empty array');
   }
+  const width = num(raw, 'width', 'timeline');
+  const height = num(raw, 'height', 'timeline');
+  const duration = num(raw, 'duration', 'timeline');
+  for (const [key, value] of [['width', width], ['height', height]] as const) {
+    if (!Number.isInteger(value) || value <= 0) {
+      throw new TimelineError(`timeline: "${key}" must be a positive whole number`);
+    }
+  }
+  if (duration <= 0) throw new TimelineError('timeline: "duration" must be greater than 0');
+
   const shots = raw.shots.map(parseShot);
+  const seen = new Set<number>();
+  for (const shot of shots) {
+    if (seen.has(shot.id)) throw new TimelineError(`duplicate shot id ${shot.id}`);
+    seen.add(shot.id);
+    if (shot.start >= duration) {
+      throw new TimelineError(`shot ${shot.id} starts at ${shot.start}, after the timeline duration (${duration})`);
+    }
+  }
+  const last = shots[shots.length - 1];
+  if (last.end > duration + EPS) {
+    throw new TimelineError(`shot ${last.id} ends at ${last.end}, after the timeline duration (${duration})`);
+  }
   for (let i = 1; i < shots.length; i++) {
     const prev = shots[i - 1];
     const cur = shots[i];
@@ -103,10 +136,10 @@ export function parseTimeline(raw: unknown): Timeline {
   }
   const tl: Timeline = {
     fps,
-    width: num(raw, 'width', 'timeline'),
-    height: num(raw, 'height', 'timeline'),
+    width,
+    height,
     voice: str(raw, 'voice', 'timeline'),
-    duration: num(raw, 'duration', 'timeline'),
+    duration,
     seed: num(raw, 'seed', 'timeline'),
     shots,
   };

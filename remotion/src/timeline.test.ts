@@ -47,10 +47,48 @@ describe('parseTimeline', () => {
   });
 });
 
+describe('parseTimeline: hand-edit mistakes fail loudly', () => {
+  test('a word outside its shot is rejected, naming the shot and the word', () => {
+    const raw = clone();
+    raw.shots[0].words[2] = { word: 'stray', start: 5.0, end: 5.3, emphasis: false };
+    expect(() => parseTimeline(raw)).toThrow(/shot 1.*stray.*outside|outside.*shot 1.*stray/);
+  });
+
+  test('a duration of zero or less is rejected', () => {
+    for (const bad of [0, -3]) {
+      const raw = clone();
+      raw.duration = bad;
+      expect(() => parseTimeline(raw)).toThrow(/duration/);
+    }
+  });
+
+  test('width and height must be positive whole numbers', () => {
+    for (const [key, bad] of [['width', 0], ['width', 1080.5], ['height', -1]] as const) {
+      const raw = clone();
+      raw[key] = bad;
+      expect(() => parseTimeline(raw)).toThrow(new RegExp(key));
+    }
+  });
+
+  test('the last shot may not end after the video does', () => {
+    const raw = clone();
+    raw.duration = 6.0; // shot 4 runs to 8.0
+    expect(() => parseTimeline(raw)).toThrow(/shot 4.*duration|duration.*shot 4/);
+  });
+
+  test('duplicate shot ids are rejected', () => {
+    const raw = clone();
+    raw.shots[1].id = 1;
+    expect(() => parseTimeline(raw)).toThrow(/duplicate/);
+  });
+});
+
 describe('shotAt', () => {
   const gapped = () => {
     const raw = clone();
     raw.shots[1].start = 2.6; // gap between 2.4 and 2.6
+    // words must now lie inside their shot, so drop the ones that began in the gap
+    raw.shots[1].words = raw.shots[1].words.filter((w: { start: number }) => w.start >= 2.6);
     return parseTimeline(raw);
   };
 

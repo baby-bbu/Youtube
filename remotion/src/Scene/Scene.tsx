@@ -1,17 +1,26 @@
 import { AbsoluteFill, Img, staticFile } from 'remotion';
-import { CAPTION_FONT, COLORS } from '../brand';
+import { CAPTION_FONT, COLORS, SAFE_ZONE, safeBox } from '../brand';
 import { fitFontSize } from '../Captions/fitFont';
 import type { Shot } from '../types';
 import { cameraTransform } from './camera';
 
-const MAX_WIDTH = 900;
+const MAX_WIDTH = safeBox().width;
+/** Title-card text starts here: above the character's head and inside the safe box. */
+export const TITLE_CARD_TOP = SAFE_ZONE.top + 20;
 
 /** Plain card used when a shot has no picture: its label (or RUNDOWN) on yellow. */
 function TitleCard({ label }: { label?: string }) {
   const text = label ?? 'RUNDOWN';
   return (
     <AbsoluteFill
-      style={{ backgroundColor: COLORS.yellow, alignItems: 'center', justifyContent: 'center' }}
+      style={{
+        backgroundColor: COLORS.yellow,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingTop: TITLE_CARD_TOP,
+        paddingLeft: SAFE_ZONE.left,
+        paddingRight: SAFE_ZONE.right,
+      }}
     >
       <div
         style={{
