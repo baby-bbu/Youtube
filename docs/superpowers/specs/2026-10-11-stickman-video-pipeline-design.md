@@ -2,6 +2,9 @@
 
 Date: 2026-10-11 (revised: new niche, brand and animation direction)
 
+> **Technical notes for building the tool.** The plain-English version for humans is
+> the repo's `README.md`. If the two ever disagree, ask before building.
+
 ## 1. Goal
 
 Turn a topic into a finished, fast-paced short-form how-to video (vertical 9:16)
