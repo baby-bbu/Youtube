@@ -46,7 +46,7 @@ describe('title card layout', () => {
   test('the card is centred inside the safe box, not on the whole frame', () => {
     const html = renderToStaticMarkup(<Scene shot={{ ...shot, image: undefined }} progress={0} />);
     expect(html).toContain('padding-left:90px');
-    expect(html).toContain('padding-right:180px');
+    expect(html).toContain('padding-right:90px');
   });
 });
 

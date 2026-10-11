@@ -59,7 +59,7 @@ def main(name, preview):
     step(2, "Listening for each word")
     run([py, "tools/make/transcribe.py", work / "voice_prep.wav", work / "words.json"])
     step(3, "Removing breaths between words")
-    run([py, "tools/make/gate.py", work / "voice_prep.wav", work / "words.json", voice])
+    run([py, "tools/make/gate.py", work / "voice_prep.wav", voice])
     step(4, "Lining the scenes up with your voice")
     timeline = work / "timeline.json"
     run([py, "tools/align/align.py", shots, work / "words.json", voice, timeline, voice_name])

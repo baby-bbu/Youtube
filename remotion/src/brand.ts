@@ -15,12 +15,11 @@ export const VIDEO = {
 } as const;
 
 /**
- * Margins kept clear so ONE master file works on YouTube Shorts, TikTok and Instagram
- * Reels. A conservative union of the apps' on-screen UI (buttons, captions, progress
- * bars). These are approximations from public guides, not official specs; check each
- * app's live preview before publishing.
+ * Margins kept clear of the edges. The channel only posts to YouTube Shorts, so they are
+ * the same on the left and right: everything, including the captions, is centred exactly
+ * on the frame. (The bottom is larger because Shorts draws its title and buttons there.)
  */
-export const SAFE_ZONE = { top: 250, bottom: 300, left: 90, right: 180 } as const;
+export const SAFE_ZONE = { top: 250, bottom: 300, left: 90, right: 90 } as const;
 
 export function safeBox(width: number = VIDEO.width, height: number = VIDEO.height) {
   return {
