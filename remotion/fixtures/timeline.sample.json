@@ -1,0 +1,219 @@
+{
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "voice": "fixtures/voice.wav",
+  "duration": 8.0,
+  "seed": 1234,
+  "shots": [
+    {
+      "id": 1,
+      "role": "hook",
+      "start": 0.0,
+      "end": 2.4,
+      "label": "COOKING",
+      "image": "fixtures/shot1.png",
+      "character": {
+        "position": "left",
+        "action": "point"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-in",
+      "sfx": {
+        "name": "whoosh",
+        "at": 0.0
+      },
+      "words": [
+        {
+          "word": "Learning",
+          "start": 0.1,
+          "end": 0.5,
+          "emphasis": false
+        },
+        {
+          "word": "to",
+          "start": 0.5,
+          "end": 0.62,
+          "emphasis": false
+        },
+        {
+          "word": "cook",
+          "start": 0.62,
+          "end": 0.95,
+          "emphasis": true
+        },
+        {
+          "word": "takes",
+          "start": 1.1,
+          "end": 1.4,
+          "emphasis": false
+        },
+        {
+          "word": "three",
+          "start": 1.4,
+          "end": 1.75,
+          "emphasis": true
+        },
+        {
+          "word": "simple",
+          "start": 1.75,
+          "end": 2.1,
+          "emphasis": false
+        },
+        {
+          "word": "steps.",
+          "start": 2.1,
+          "end": 2.35,
+          "emphasis": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "role": "myth",
+      "start": 2.4,
+      "end": 4.0,
+      "label": "HARD?",
+      "image": "fixtures/shot2.png",
+      "character": {
+        "position": "right",
+        "action": "shrug"
+      },
+      "transition": "slide-right",
+      "camera": "pan-left",
+      "words": [
+        {
+          "word": "Most",
+          "start": 2.5,
+          "end": 2.75,
+          "emphasis": false
+        },
+        {
+          "word": "people",
+          "start": 2.75,
+          "end": 3.1,
+          "emphasis": false
+        },
+        {
+          "word": "think",
+          "start": 3.1,
+          "end": 3.35,
+          "emphasis": false
+        },
+        {
+          "word": "it",
+          "start": 3.35,
+          "end": 3.45,
+          "emphasis": false
+        },
+        {
+          "word": "is",
+          "start": 3.45,
+          "end": 3.55,
+          "emphasis": false
+        },
+        {
+          "word": "hard.",
+          "start": 3.55,
+          "end": 3.95,
+          "emphasis": true
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "role": "step",
+      "start": 4.0,
+      "end": 6.2,
+      "image": "fixtures/shot3.png",
+      "character": {
+        "position": "centre",
+        "action": "bounce"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-out",
+      "words": [
+        {
+          "word": "Step",
+          "start": 4.1,
+          "end": 4.35,
+          "emphasis": false
+        },
+        {
+          "word": "one,",
+          "start": 4.35,
+          "end": 4.6,
+          "emphasis": false
+        },
+        {
+          "word": "pick",
+          "start": 4.75,
+          "end": 5.0,
+          "emphasis": true
+        },
+        {
+          "word": "a",
+          "start": 5.0,
+          "end": 5.08,
+          "emphasis": false
+        },
+        {
+          "word": "simple",
+          "start": 5.08,
+          "end": 5.45,
+          "emphasis": false
+        },
+        {
+          "word": "recipe.",
+          "start": 5.45,
+          "end": 5.9,
+          "emphasis": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "role": "outro",
+      "start": 6.2,
+      "end": 8.0,
+      "character": {
+        "position": "left",
+        "action": "wave"
+      },
+      "transition": "cut",
+      "camera": "static",
+      "words": [
+        {
+          "word": "That",
+          "start": 6.3,
+          "end": 6.55,
+          "emphasis": false
+        },
+        {
+          "word": "is",
+          "start": 6.55,
+          "end": 6.7,
+          "emphasis": false
+        },
+        {
+          "word": "the",
+          "start": 6.7,
+          "end": 6.85,
+          "emphasis": false
+        },
+        {
+          "word": "whole",
+          "start": 6.85,
+          "end": 7.2,
+          "emphasis": false
+        },
+        {
+          "word": "rundown.",
+          "start": 7.2,
+          "end": 7.8,
+          "emphasis": true
+        }
+      ]
+    }
+  ]
+}
