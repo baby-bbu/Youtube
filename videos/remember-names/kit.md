@@ -1,7 +1,6 @@
 # Kit: remembering names
 
-Files: `out/full.mp4` (the video), `thumbnail-16x9.png` (1280x720 thumbnail),
-`cover-9x16.png` (1080x1920 cover for TikTok and Reels).
+Files: `out/full.mp4` (the video) and `thumbnail-16x9.png` (1280x720 thumbnail).
 
 ## YouTube Shorts
 
@@ -34,16 +33,3 @@ how to remember names, remember names, remembering names, why do i forget names,
 
 **Thumbnail:** upload `thumbnail-16x9.png`. (Shorts mostly show the video frame in the feed, so
 this matters most on your channel page and in search.)
-
-## TikTok
-Caption: Why do you forget a name in five seconds? Say it back, picture it, use it twice. #memory #socialskills #learnontiktok #tips
-Cover: `cover-9x16.png`
-
-## Instagram Reels
-Caption: Why do you forget a name in five seconds? Say it back, picture it, use it twice. #memory #socialskills #tips
-Cover: `cover-9x16.png`
-
-## Sources
-- TODO before posting: add one real source link. The tips (repeat the name, link it to a mental
-  picture, use it again) are widely taught memory techniques, but no source is listed yet and the
-  tool requires one whenever a video gives advice.
