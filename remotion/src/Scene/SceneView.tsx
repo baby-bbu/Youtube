@@ -17,6 +17,8 @@ const BG_COLOUR: Record<Bg, { base: string; dot: string; floor: string }> = {
 export const FLOOR_Y = 1455;
 export const BUDDY_SCALE = 1.1;
 const FOREGROUND = '#FFFFFF';
+/** A hard, offset shadow under props and bubbles, like a sticker on the page. */
+const SHADOW = 'drop-shadow(7px 9px 0 rgba(15,15,15,0.28))';
 const TEXT_FILL: Record<TextColour, string> = { white: '#fff', yellow: COLORS.yellow, ink: COLORS.ink };
 
 /** Rough width in px of a line of bold text; used to keep bubbles and stamps on screen. */
@@ -37,6 +39,7 @@ function place(item: SceneItem, shot: Shot, time: number, base: { left: number; 
       ...base,
       opacity: e.opacity,
       visibility: e.visible ? 'visible' : 'hidden',
+      filter: item.kind === 'prop' || item.kind === 'bubble' ? SHADOW : undefined,
       transform: `translate(${e.x + l.x}px, ${e.y + l.y}px) rotate(${(item.rot ?? 0) + e.rot + l.rot}deg) scale(${e.scale * l.scale})`,
     },
   };
@@ -60,7 +63,7 @@ function ItemView({ item, shot, time }: { item: SceneItem; shot: Shot; time: num
       left: item.x * W - w / 2, top: item.y * H - item.size * 0.6, width: w, height: item.size * 1.2,
     });
     return (
-      <div style={{ ...style, textAlign: 'center', whiteSpace: 'pre', lineHeight: 1.05, fontFamily: CAPTION_FONT, fontWeight: 900, fontSize: item.size, color: TEXT_FILL[item.colour ?? 'white'], WebkitTextStroke: `${Math.round(item.size * 0.14)}px ${COLORS.ink}`, paintOrder: 'stroke fill' }}>
+      <div style={{ ...style, textAlign: 'center', whiteSpace: 'pre', lineHeight: 1.05, fontFamily: CAPTION_FONT, fontWeight: 900, fontSize: item.size, color: TEXT_FILL[item.colour ?? 'white'], WebkitTextStroke: `${Math.max(14, Math.round(item.size * 0.17))}px ${COLORS.ink}`, paintOrder: 'stroke fill', letterSpacing: '0.02em', filter: 'drop-shadow(0px 9px 0 rgba(15,15,15,0.35))' }}>
         {item.text}
       </div>
     );
@@ -74,12 +77,12 @@ function ItemView({ item, shot, time }: { item: SceneItem; shot: Shot; time: num
     });
     const tail: React.CSSProperties = {
       position: 'absolute', bottom: -22, [item.tail === 'left' ? 'left' : 'right']: 46, width: 38, height: 38,
-      background: FOREGROUND, borderRight: `8px solid ${COLORS.ink}`, borderBottom: `8px solid ${COLORS.ink}`,
+      background: FOREGROUND, borderRight: `10px solid ${COLORS.ink}`, borderBottom: `10px solid ${COLORS.ink}`,
       transform: `rotate(${item.tail === 'left' ? 65 : 25}deg)`,
     };
     return (
       <div style={style}>
-        <div style={{ position: 'relative', width: '100%', height: '100%', boxSizing: 'border-box', background: FOREGROUND, border: `8px solid ${COLORS.ink}`, borderRadius: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', whiteSpace: 'pre', lineHeight: 1.1, fontFamily: CAPTION_FONT, fontWeight: 900, fontSize: item.size, color: COLORS.ink }}>
+        <div style={{ position: 'relative', width: '100%', height: '100%', boxSizing: 'border-box', background: FOREGROUND, border: `10px solid ${COLORS.ink}`, borderRadius: 52, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', whiteSpace: 'pre', lineHeight: 1.1, fontFamily: CAPTION_FONT, fontWeight: 900, fontSize: item.size, color: COLORS.ink }}>
           {item.text}
           <div style={tail} />
         </div>
@@ -94,14 +97,15 @@ function ItemView({ item, shot, time }: { item: SceneItem; shot: Shot; time: num
   const boxLeft = cx - 200 * s;
   const boxTop = FLOOR_Y - 406 * s - 8;
   const { style } = place(item, shot, time, { left: boxLeft, top: boxTop, width: 400 * s, height: 450 * s });
-  const handX = (flip ? 400 - 248 : 248) * s;
-  const handY = (296 - 70) * s;
+  // the held prop is centred just beyond the raised hand (artwork coords 330,345), in front of the chest
+  const heldX = (flip ? 400 - 330 : 330) * s;
+  const heldY = (345 - 70) * s;
   return (
     <div style={style}>
       <Buddy hat={item.hat} action={item.action} t={local} talking={item.talking} flip={flip} scale={s} holding={!!item.holds} />
       {item.holds && (
-        <div style={{ position: 'absolute', left: handX + (flip ? -1 : 1) * 36 - 110, top: handY - 40, width: 220, height: 220 }}>
-          <Prop name={item.holds} size={220} />
+        <div style={{ position: 'absolute', left: heldX - 90, top: heldY - 90, width: 180, height: 180 }}>
+          <Prop name={item.holds} size={180} />
         </div>
       )}
     </div>

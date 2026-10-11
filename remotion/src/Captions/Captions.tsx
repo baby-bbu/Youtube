@@ -37,6 +37,7 @@ export function Captions({ groups, frame, fps }: CaptionsProps) {
           fontWeight: 900,
           fontSize: fitFontSize(group.text, CAPTION_BOX.width, BASE_FONT_PX),
           lineHeight: 1.05,
+          letterSpacing: '0.02em',
           color: COLORS.white,
           WebkitTextStroke: '16px #000',
           paintOrder: 'stroke fill',

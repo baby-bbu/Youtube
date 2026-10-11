@@ -37,6 +37,26 @@ function incomingStyle(kind: Transition, p: number, width: number): CSSPropertie
   }
 }
 
+/** Number of different wobble patterns the line "boil" cycles through. */
+const BOIL_VARIANTS = 3;
+const BOIL_EVERY_FRAMES = 4;
+
+/** Slightly displaces everything it filters, so lines look hand-inked and re-drawn each beat. */
+function BoilFilters() {
+  return (
+    <svg width="0" height="0" style={{ position: 'absolute' }}>
+      <defs>
+        {Array.from({ length: BOIL_VARIANTS }, (_, i) => (
+          <filter key={i} id={`boil${i}`} x="-2%" y="-2%" width="104%" height="104%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.011 0.016" numOctaves="2" seed={i * 7 + 3} result="n" />
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        ))}
+      </defs>
+    </svg>
+  );
+}
+
 /** The whole short: scenes, label, the Rundown Guy, captions and the voice track. */
 export const Short: React.FC<Timeline> = (rawProps) => {
   const tl = useMemo(() => parseTimeline(rawProps), [rawProps]);
@@ -72,6 +92,8 @@ export const Short: React.FC<Timeline> = (rawProps) => {
   return (
     <AbsoluteFill style={{ backgroundColor: '#0F0F0F' }}>
       <Audio src={staticFile(tl.voice)} />
+      <BoilFilters />
+      <AbsoluteFill style={{ filter: `url(#boil${Math.floor(frame / BOIL_EVERY_FRAMES) % BOIL_VARIANTS})`, transform: 'scale(1.04)' }}>
       {transitioning && <Scene shot={tl.shots[index - 1]} progress={1} time={tl.shots[index - 1].end - tl.shots[index - 1].start} />}
       <AbsoluteFill
         style={transitioning ? incomingStyle(shot.transition, framesIntoShot / transFrames, width) : {}}
@@ -81,6 +103,7 @@ export const Short: React.FC<Timeline> = (rawProps) => {
       <div style={{ position: 'absolute', left: guy.left, top: guy.top }}>
         <Guy pose={pose} sticker scale={GUY_SCALE} />
       </div>
+      </AbsoluteFill>
       <Captions groups={groups} frame={frame} fps={fps} />
     </AbsoluteFill>
   );

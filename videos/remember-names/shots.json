@@ -24,33 +24,23 @@
           {
             "kind": "prop",
             "name": "clock",
-            "x": 0.3,
+            "x": 0.27,
             "y": 0.3,
-            "size": 360,
+            "size": 350,
             "text": "5 SEC",
             "loop": "wiggle"
           },
           {
             "kind": "prop",
             "name": "nametag",
-            "x": 0.7,
+            "x": 0.68,
             "y": 0.3,
-            "size": 348,
+            "size": 330,
             "text": "???",
             "anim": "drop",
             "at": "word:name",
             "rot": 8,
             "loop": "wiggle"
-          },
-          {
-            "kind": "prop",
-            "name": "sparkle",
-            "x": 0.5,
-            "y": 0.2,
-            "size": 110,
-            "anim": "spin",
-            "at": "word:five",
-            "loop": "spin"
           }
         ]
       }
@@ -89,8 +79,8 @@
             "kind": "prop",
             "name": "question",
             "x": 0.2,
-            "y": 0.2,
-            "size": 170,
+            "y": 0.19,
+            "size": 190,
             "at": "word:bad",
             "loop": "wiggle",
             "rot": -10
@@ -114,28 +104,30 @@
           {
             "kind": "prop",
             "name": "brain",
-            "x": 0.64,
+            "x": 0.66,
             "y": 0.3,
-            "size": 408,
+            "size": 380,
             "loop": "bob"
           },
           {
             "kind": "prop",
             "name": "nametag",
-            "x": 0.32,
+            "x": 0.27,
             "y": 0.31,
-            "size": 252,
+            "size": 250,
             "text": "SAM",
             "anim": "slide-left",
             "at": "word:never",
-            "rot": -12
+            "rot": -10
           },
           {
-            "kind": "prop",
-            "name": "xmark",
+            "kind": "text",
+            "text": "NOPE",
             "x": 0.5,
-            "y": 0.31,
-            "size": 170,
+            "y": 0.14,
+            "size": 150,
+            "colour": "yellow",
+            "rot": -5,
             "at": "word:memory",
             "loop": "shake"
           }
@@ -202,21 +194,11 @@
           {
             "kind": "bubble",
             "text": "Nice to meet\nyou, Sam!",
-            "x": 0.5,
+            "x": 0.52,
             "y": 0.29,
             "size": 66,
             "tail": "right",
             "at": "word:Nice"
-          },
-          {
-            "kind": "prop",
-            "name": "sparkle",
-            "x": 0.19,
-            "y": 0.52,
-            "size": 120,
-            "anim": "spin",
-            "at": "word:listen",
-            "loop": "pulse"
           }
         ]
       }
@@ -239,7 +221,7 @@
             "kind": "text",
             "text": "STEP 2",
             "x": 0.5,
-            "y": 0.17,
+            "y": 0.14,
             "size": 190,
             "colour": "yellow",
             "rot": 3,
@@ -249,8 +231,8 @@
             "kind": "prop",
             "name": "bulb",
             "x": 0.5,
-            "y": 0.335,
-            "size": 360,
+            "y": 0.31,
+            "size": 330,
             "anim": "drop",
             "at": "word:Picture",
             "loop": "pulse"
@@ -310,7 +292,7 @@
             "kind": "text",
             "text": "STEP 3",
             "x": 0.5,
-            "y": 0.15,
+            "y": 0.14,
             "size": 190,
             "colour": "yellow",
             "rot": -3,
@@ -319,9 +301,9 @@
           {
             "kind": "prop",
             "name": "clock",
-            "x": 0.3,
+            "x": 0.28,
             "y": 0.34,
-            "size": 324,
+            "size": 320,
             "text": "1 MIN",
             "at": "word:first"
           },
@@ -355,9 +337,9 @@
           {
             "kind": "prop",
             "name": "door",
-            "x": 0.8,
+            "x": 0.9,
             "y": 0.62,
-            "size": 340
+            "size": 380
           },
           {
             "kind": "buddy",
@@ -395,31 +377,21 @@
           {
             "kind": "prop",
             "name": "checklist",
-            "x": 0.3,
+            "x": 0.27,
             "y": 0.31,
-            "size": 396,
+            "size": 340,
             "anim": "rise"
           },
           {
             "kind": "text",
             "text": "ALL 3!",
-            "x": 0.68,
+            "x": 0.66,
             "y": 0.28,
-            "size": 160,
+            "size": 120,
             "colour": "yellow",
             "rot": 6,
             "at": "word:all",
             "loop": "pulse"
-          },
-          {
-            "kind": "prop",
-            "name": "star",
-            "x": 0.84,
-            "y": 0.2,
-            "size": 110,
-            "anim": "spin",
-            "at": "word:three",
-            "loop": "spin"
           }
         ]
       }
@@ -438,32 +410,32 @@
         "bg": "lilac",
         "items": [
           {
+            "kind": "text",
+            "text": "STORED",
+            "x": 0.5,
+            "y": 0.15,
+            "size": 150,
+            "colour": "yellow",
+            "rot": -3,
+            "at": "word:stored",
+            "loop": "pulse"
+          },
+          {
             "kind": "prop",
             "name": "brain",
-            "x": 0.25,
-            "y": 0.3,
-            "size": 360,
+            "x": 0.3,
+            "y": 0.32,
+            "size": 300,
             "loop": "bob"
           },
           {
             "kind": "prop",
             "name": "lock",
-            "x": 0.25,
-            "y": 0.35,
-            "size": 150,
+            "x": 0.64,
+            "y": 0.33,
+            "size": 170,
             "at": "word:stored",
             "anim": "drop"
-          },
-          {
-            "kind": "text",
-            "text": "STORED",
-            "x": 0.62,
-            "y": 0.27,
-            "size": 104,
-            "colour": "yellow",
-            "rot": 5,
-            "at": "word:stored",
-            "loop": "pulse"
           }
         ]
       }
@@ -502,8 +474,8 @@
             "kind": "prop",
             "name": "nametag",
             "x": 0.64,
-            "y": 0.32,
-            "size": 324,
+            "y": 0.33,
+            "size": 320,
             "text": "SAM",
             "at": "word:name",
             "anim": "drop",
