@@ -44,9 +44,11 @@ The whole loop for one video is three steps:
 Optional: drop your own image into `videos/<name>/images/<shot id>.png` to override
 any shot's picture. Everything else is automatic.
 
-The tool needs **no accounts or API keys by default**. A one-time
-`python make.py --setup` checks that Python, Node, ffmpeg and the music/SFX files are
-in place and tells the user exactly what is missing.
+Setup is one-time. Two **free** API keys (Pexels and Pixabay) are recommended for good
+photo coverage and go in a local `.env` file (never committed). Without them the tool
+still works, using Wikimedia Commons, icons and title cards. A one-time
+`python make.py --setup` checks that Python, Node, ffmpeg, the music/SFX files and the
+keys are in place and tells the user exactly what is missing.
 
 ## 3. Pipeline
 
@@ -78,6 +80,8 @@ full-quality render.
 
 ```
 make.py                   orchestrator (Python)
+.env.example              names of the optional keys (PEXELS_API_KEY, PIXABAY_API_KEY)
+.env                      your real keys; git-ignored, never committed
 tools/prep/               silence trim, denoise, loudnorm
 tools/transcribe/         Whisper wrapper -> words.json
 tools/align/              shots.json + words.json -> timeline.json
@@ -189,13 +193,21 @@ the script marks with `*asterisks*`). Transcription uses word-level timestamps
 For each shot, in order, until one succeeds:
 1. **Your own file:** `videos/<name>/images/<shot id>.png` (or .jpg) always wins.
 2. **Cache:** reuse an image already fetched for the same query.
-3. **Free-licensed sources:** Wikimedia Commons (public-domain, CC0, CC-BY, CC-BY-SA),
-   which needs no key. Pexels/Pixabay can be added later with a free key. Only
-   licences that allow reuse are accepted.
-4. **Icon:** a big OpenMoji icon (open licence, bundled) named by `image.icon`. It fits
+3. **Pexels:** stock photos and video stills, searched with `image.query`. Needs
+   `PEXELS_API_KEY`; skipped silently if the key is missing.
+4. **Pixabay:** the same, with `PIXABAY_API_KEY`.
+5. **Wikimedia Commons** (public-domain, CC0, CC-BY, CC-BY-SA): no key needed. Better
+   for places, objects and history than for everyday lifestyle shots.
+6. **Icon:** a big OpenMoji icon (open licence, bundled) named by `image.icon`. It fits
    the cartoon look and is always available.
-5. **Title card:** the shot's label on a plain background, plus a warning in the
+7. **Title card:** the shot's label on a plain background, plus a warning in the
    report. The pipeline never fails because an image is missing.
+
+Only licences that allow reuse are accepted. Pexels and Pixabay each have their own
+licence (free commercial use, no attribution required); the user is responsible for
+checking their current terms. For sensitive topics the step skips results whose main
+subject is a recognisable person, and prefers objects, places and scenes. Keys are
+read from `.env` (see `.env.example`), checked by `--setup`, and never logged.
 
 If `cutout` is true, the background is removed locally (rembg or similar, free).
 
@@ -297,8 +309,9 @@ automatically. Nothing is posted automatically.
 - `prep`: fixture clip; silence shortened, loudness in target range.
 - `align`: fixtures for exact match, ad-libbed match, unmatched shot, out-of-order shots.
 - `validate` and `check`: one test per rule.
-- `images`: mocked source responses for own file, cache hit, free-source hit, licence
-  rejection, icon fallback and title card; the log is written correctly in each case.
+- `images`: mocked source responses for own file, cache hit, Pexels hit, Pixabay hit,
+  Wikimedia hit, licence rejection, missing key (source skipped), icon fallback and
+  title card; the log is written correctly in each case and no key ever appears in it.
 - `transcribe`: one smoke test on a short fixture audio file.
 - `check`: stall check on synthetic frames.
 - `--preview`: renders a fixture video quickly and the pacing matches the full render.
@@ -317,7 +330,8 @@ automatically. Nothing is posted automatically.
 6. `validate` and `prep` (trim, denoise, normalise).
 7. `transcribe` (local Whisper, word timestamps).
 8. `align`.
-9. `images`: own file, cache, Wikimedia Commons, icons, title card, cutouts, licence log.
+9. `images`: own file, cache, Pexels, Pixabay, Wikimedia Commons, icons, title card,
+   cutouts, licence log, `.env` key handling.
 10. Music ducking and SFX.
 11. `make.py` orchestration with `--preview` and `--setup`, plus the end-to-end test.
     **This is the first point at which a full video can be made.**
@@ -329,7 +343,6 @@ Each step ends with something runnable and is its own small commit.
 ## 17. Backlog (not in v1)
 
 - Rive/Lottie rig for richer expressions; eye-shape changes (shades are fixed for now).
-- Pexels/Pixabay as extra photo sources (free keys).
 - Batch / series mode.
 - Performance feedback loop: paste in retention stats and tune the rules.
 
@@ -341,8 +354,10 @@ Each step ends with something runnable and is its own small commit.
 - **Tagline** is placeholder copy.
 - **Handles:** @rundownguy looked free on YouTube only; confirm and claim on TikTok,
   Instagram and Shorts before posting.
-- Wikimedia Commons coverage for "how-to" topics may be thin; the icon fallback and
-  the own-image override are the safety net, and Pexels/Pixabay can be added later.
+- **Pexels and Pixabay keys** must be obtained by the user (free). Their current
+  licence terms and rate limits are checked at build time, not assumed.
+- Photo coverage for some topics may still be thin; the icon fallback and the
+  own-image override are the safety net.
 - Whisper on CPU is assumed fast enough (about 1-2 min for a 1-minute clip).
 - Remotion's current packages and guidance are checked at build time, not assumed.
 - Python 3, Node and ffmpeg are assumed available (verified in step 1).
