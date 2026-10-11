@@ -1,0 +1,23 @@
+{
+  "name": "rundown-guy-renderer",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "vitest run",
+    "still": "remotion still src/index.ts Short out/hello.png",
+    "render": "remotion render src/index.ts Short out/video.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.534",
+    "@remotion/media-utils": "4.0.534",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "remotion": "4.0.534"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "5.9.3",
+    "vitest": "3.2.4"
+  }
+}

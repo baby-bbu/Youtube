@@ -12,3 +12,7 @@ node_modules/
 __pycache__/
 *.pyc
 .DS_Store
+
+# Renderer build output and generated fixtures
+remotion/out/
+remotion/public/fixtures/
