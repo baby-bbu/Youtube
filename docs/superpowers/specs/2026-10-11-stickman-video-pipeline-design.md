@@ -266,8 +266,8 @@ Script rules (applied when Claude writes `shots.json`):
   used by default.
 - **Structure:** hook -> why it feels hard (myth) -> 2-3 simple steps -> payoff that
   loops back to the hook.
-- **Length:** aim for about 30 seconds (roughly 75-90 spoken words, 10-12 shots), no
-  filler. The `check` warning range stays wide (20-75 s) so a longer video is allowed.
+- **Length:** 30-60 seconds (roughly 75-150 spoken words), no filler. The `check`
+  warning range stays wide (20-75 s) so a slightly longer video is allowed.
 - **Pacing:** a new visual beat at least every 0.5s and a shot change at least every
   3s.
 - **Accuracy:** every factual or advice claim needs a source or an evident basis. No
