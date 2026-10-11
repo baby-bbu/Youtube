@@ -7,6 +7,9 @@ Decided 2026-10-11.
 - **Handle:** @rundownguy (YouTube page returned 404 when checked, so it was probably
   free; TikTok and Instagram were NOT confirmed. Claim all handles before posting.)
 - **Tagline:** "the quick rundown on anything." (placeholder copy, easy to change)
+- **Channel description (About):**
+  > Rundown Guy here. You've got better things to do than watch a 20-minute video, so
+  > I break things down fast. New skill, quick rundown, done.
 - **Niche:** short-form how-to guides: a simple rundown of how to get good at, or do,
   something. Vertical 9:16, aimed at 30-60 seconds.
 - **Narrator:** the stickman is "the guy". He is the Rundown Guy.
@@ -42,8 +45,11 @@ Decided 2026-10-11.
 ## Files
 - `pfp-yellow-800.png` / `pfp-yellow.svg`: profile picture (800x800, YouTube crops
   to a circle).
-- `banner-black-2560x1440.png` / `banner-black.svg`: channel banner. Text is inside
-  YouTube's safe area (1546x423 centred).
+- `banner-black-2560x1440.png` / `banner-black.svg`: channel banner. A flat `#0F0F0F`
+  background (YouTube's dark-mode page colour) with the tagline only, no channel name,
+  because the name and profile picture already sit beside it. The text is inside
+  YouTube's safe area (1546x423 centred). In YouTube's light theme it shows as a dark
+  block.
 - `character/rundown-guy.svg` / `.png`: standalone character with named groups
   (`body`, `head`, `face`, `mouth`, `cap`) ready to be split into a Remotion rig.
 - `character/character-sheet.png`: the pose and mouth-shape sheet from the design

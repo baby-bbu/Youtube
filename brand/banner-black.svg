@@ -1,5 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440">
-<defs><radialGradient id="glow" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#242424"/><stop offset="0.55" stop-color="#121212"/><stop offset="1" stop-color="#080808"/></radialGradient></defs>
-<rect width="2560" height="1440" fill="url(#glow)"/>
-<text x="1280" y="745" text-anchor="middle" font-family="Inter" font-weight="900" font-size="215" fill="#FFD400" textLength="1420" lengthAdjust="spacingAndGlyphs">RUNDOWN GUY</text>
-<text x="1280" y="858" text-anchor="middle" font-family="Inter" font-weight="600" font-size="62" fill="#FFFFFF" textLength="820" lengthAdjust="spacingAndGlyphs">the quick rundown on anything.</text></svg>
+<rect width="2560" height="1440" fill="#0F0F0F"/>
+<text x="1280" y="745" text-anchor="middle" font-family="Inter" font-weight="700" font-size="84" fill="#FFFFFF">the quick <tspan fill="#FFD400" font-weight="900">rundown</tspan> on anything.</text>
+</svg>
