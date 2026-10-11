@@ -58,6 +58,6 @@ Decided 2026-10-11.
 ## Rules
 - Do not copy other channels' names, formats, characters or scripts.
 - Do not use celebrity photos or other people's copyrighted characters. Use
-  free-licensed images or generated ones.
+  free-licensed images, your own pictures, or built-in icons. No AI-generated images.
 - Do not make unverified factual claims; every claim in a script needs a source.
   No income, health or medical guarantees.

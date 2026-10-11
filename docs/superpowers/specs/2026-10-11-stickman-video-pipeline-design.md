@@ -18,23 +18,35 @@ rundown on anything"). Brand details are in `brand/brand.md`.
   moves around the frame, and gestures on emphasis.
 - The video is fast and motion-driven, not a slideshow: a new visual beat at least
   every 0.5s and a shot change at least every 3s.
-- Each shot shows a relevant image (free-licensed or generated), with word-by-word
-  captions and big outlined labels.
+- Each shot shows a relevant image (free-licensed, or an icon when no photo fits),
+  with word-by-word captions and big outlined labels.
 - Audio is clean: noise removed, dead air trimmed, volume normalised, music ducked
   under the voice, sound effects on cuts.
 - Rendering is free and repeatable once images and the script exist.
 
 **Non-goals (v1)**
 - No text-to-speech (the user records the voice).
-- No AI video clips (AI is used for still images only, as a fallback).
+- No AI image or video generation. Images come from free sources, the user's own
+  files, or built-in icons.
 - No horizontal 16:9 output; no web UI; no auto-posting.
 - No guarantee of reach; the retention rules only improve the odds.
 
 ## 2. Automation principle
 
-Per video the user: (a) gives a topic and picks one of three hook variants (default:
-the first), and (b) records the voice-over. After that, one command does the rest.
-One-time setup (API keys, music and SFX files) is done once, not per video.
+The whole loop for one video is three steps:
+1. **Topic:** tell Claude the topic and get back the script, shot list and posting kit.
+   Hook alternatives are written into `script.md`; the first one is used unless the
+   user edits `shots.json`, so no decision is required.
+2. **Record:** record the voice-over and drop it into the video's folder.
+3. **Make:** run `python make.py <name>`. Add `--preview` first for a fast, low-res
+   draft to check the pacing, then run it again without the flag for the final.
+
+Optional: drop your own image into `videos/<name>/images/<shot id>.png` to override
+any shot's picture. Everything else is automatic.
+
+The tool needs **no accounts or API keys by default**. A one-time
+`python make.py --setup` checks that Python, Node, ffmpeg and the music/SFX files are
+in place and tells the user exactly what is missing.
 
 ## 3. Pipeline
 
@@ -42,20 +54,25 @@ One-time setup (API keys, music and SFX files) is done once, not per video.
 1. script   User gives a topic -> Claude (in chat) writes:
               script.md, shots.json (+ 3 hook variants), kit.md (title, caption, hashtags)
 2. record   USER records voice-over -> videos/<name>/voiceover.wav   [only manual step per video]
-3. make     python make.py <name>
+3. make     python make.py <name>        (add --preview for a fast low-res draft)
+              |- validate   : check shots.json names and tools up front (fails fast, before slow work)
               |- prep       : trim silences/breaths, denoise, loudness-normalise -> voice_clean.wav
               |- transcribe : local Whisper (word timestamps) -> words.json
               |- align      : shots.json + words.json -> timeline.json
-              |- assets     : find/generate an image per shot, remove background -> assets log
-              |- lint       : retention-rule and name checks (warnings; unknown names are errors)
+              |- images     : one image per shot (see section 8), background removal if needed
               |- render     : Remotion -> out/final.mp4 (voice + ducked music + SFX)
-              '- qa         : sampled frames + mechanical checks -> out/qa/ report
+              '- check      : retention rules + sampled-frame checks -> out/report.md
 ```
 
-`make.py` runs stages in order, stops at the first failure and names the failing
-stage. Each stage can be run alone (`--only align`) and is skipped when its output is
-newer than its inputs. Trimming changes timing, so all later stages use
-`voice_clean.wav`, never the raw recording.
+`make.py` runs the stages in order, stops at the first failure and names the failing
+stage and the fix. Stages are skipped when their output is newer than their inputs, so
+re-running after an edit only redoes what changed. Each stage can also be run alone
+(`--only align`). Trimming changes timing, so all later stages use `voice_clean.wav`,
+never the raw recording.
+
+**Preview mode** renders at 540x960 and 15 fps with no final audio mix. It exists so
+the pacing and the shot matches can be checked in seconds before spending time on the
+full-quality render.
 
 ## 4. Project layout
 
@@ -64,13 +81,13 @@ make.py                   orchestrator (Python)
 tools/prep/               silence trim, denoise, loudnorm
 tools/transcribe/         Whisper wrapper -> words.json
 tools/align/              shots.json + words.json -> timeline.json
-tools/assets/             image search, licence check, generation fallback, cutouts
-tools/lint/               rule checks
-tools/qa/                 frame sampling + mechanical checks
+tools/images/             image search, licence check, icon fallback, cutouts
+tools/check/              retention rules, name validation, frame sampling
 brand/                    brand sheet, profile picture, banner, character artwork
 assets/
   music/ sfx/ fonts/      royalty-free audio and open-licence fonts + manifests
-  cache/                  downloaded or generated images, keyed by query hash
+  icons/                  OpenMoji icon set (open licence), used as the fallback picture
+  cache/                  downloaded images, keyed by query hash
   log.json                source, licence, URL and attribution for every image used
 remotion/                 Remotion project (Node/TypeScript)
   src/Guy/                character rig, face-turn, mouth shapes, gestures
@@ -79,7 +96,9 @@ remotion/                 Remotion project (Node/TypeScript)
   src/Audio/              music ducking, SFX placement
 videos/<name>/            per-video inputs and outputs
   script.md shots.json kit.md voiceover.wav voice_clean.wav
-  words.json timeline.json out/final.mp4 out/cover.png out/qa/
+  images/                 optional: your own pictures, named by shot id (override)
+  words.json timeline.json
+  out/final.mp4 out/cover.png out/report.md
 docs/superpowers/specs/   design docs
 ```
 
@@ -102,7 +121,7 @@ touching the other. Each tool is a small unit testable on its own.
       "text": "Learning to cook is not as hard as you think.",
       "role": "hook",
       "label": "COOKING",
-      "image": { "query": "home kitchen cooking", "prompt": "a busy home kitchen, photo style", "cutout": false },
+      "image": { "query": "home kitchen cooking", "icon": "cooking", "cutout": false },
       "character": { "position": "left", "action": "point" },
       "transition": "slide-left",
       "camera": "zoom-in",
@@ -114,11 +133,11 @@ touching the other. Each tool is a small unit testable on its own.
 - `text` is the exact narration for the shot and is what the align step searches for.
 - `role` is one of `hook | myth | step | payoff | outro`.
 - `label` is an optional single big outlined word shown on screen.
-- `image.query` is used for free-source search; `image.prompt` is used only if
-  generation is needed; `cutout` removes the background for floating objects.
+- `image.query` is the free-source search text; `image.icon` is the icon name used if
+  no photo fits; `cutout` removes the background for floating objects.
 - `character.position` is `left | centre | right`; `action` is a named gesture.
-- `transition`, `camera`, `sfx`, and `music_mood` are names from fixed libraries;
-  unknown names fail lint early.
+- `transition`, `camera`, `sfx`, `icon` and `music_mood` are names from fixed
+  libraries; unknown names fail the `validate` stage immediately.
 
 ### words.json
 Array of `{ "word": "...", "start": 0.00, "end": 0.31 }`.
@@ -165,18 +184,18 @@ gestures. `emphasis` is set by simple rules (word after a pause > 0.35s, numbers
 the script marks with `*asterisks*`). Transcription uses word-level timestamps
 (WhisperX or faster-whisper with forced alignment) for tight timing.
 
-## 8. Assets step (images)
+## 8. Images step
 
 For each shot, in order, until one succeeds:
-1. **Cache:** reuse an image already fetched for the same query.
-2. **Free-licensed sources:** Wikimedia Commons (public-domain, CC0, CC-BY, CC-BY-SA),
-   then Pexels/Pixabay (free API keys supplied once by the user). Only licences that
-   allow reuse are accepted.
-3. **Generation fallback:** the user's Higgsfield account via its CLI, using
-   `image.prompt`. (Its exact CLI/API access is an assumption to verify when this
-   step is built; if unavailable, step 4 applies.)
-4. **Placeholder:** a plain title card plus a warning in the QA report. The pipeline
-   never fails because an image is missing.
+1. **Your own file:** `videos/<name>/images/<shot id>.png` (or .jpg) always wins.
+2. **Cache:** reuse an image already fetched for the same query.
+3. **Free-licensed sources:** Wikimedia Commons (public-domain, CC0, CC-BY, CC-BY-SA),
+   which needs no key. Pexels/Pixabay can be added later with a free key. Only
+   licences that allow reuse are accepted.
+4. **Icon:** a big OpenMoji icon (open licence, bundled) named by `image.icon`. It fits
+   the cartoon look and is always available.
+5. **Title card:** the shot's label on a plain background, plus a warning in the
+   report. The pipeline never fails because an image is missing.
 
 If `cutout` is true, the background is removed locally (rembg or similar, free).
 
@@ -199,17 +218,18 @@ audio loudness):
   side.
 - **Mouth shapes** swapped per word: closed, small, oh, teeth, big, wide. White
   interior, black outline.
-- **Head and body bob** on stressed words, plus idle sway and blinks of the face.
+- **Head and body bob** on stressed words, plus an idle sway.
 - **Gestures** from `character.action` (point, shrug, bounce, wave): short thick
   limbs, stepped between poses for a snappy, limited-animation feel.
 - **Movement** around the frame per `character.position` and across shots.
 - **Props** layered on the character (hats, glasses, costume pieces) are cutout
-  images from the assets step, used sparingly.
+  images from the images step, used sparingly.
 - On dark or busy backgrounds the character gets a white sticker outline.
 
 ## 10. Look and editing
 
-- **Backgrounds:** a real or generated image per shot, with a slow zoom or pan.
+- **Backgrounds:** a free-licensed photo, your own picture, or a big icon per shot, with
+  a slow zoom or pan.
 - **Transitions:** horizontal slide between shots (default), with a few other named
   types (cut, zoom, whip).
 - **Captions:** one to three words at a time in the lower third, rounded bold white
@@ -223,11 +243,12 @@ audio loudness):
 - **Safe zones:** captions and labels stay clear of the platform UI (right-side
   buttons and bottom description area).
 
-## 11. Content rules and lint
+## 11. Content rules and checks
 
 Script rules (applied when Claude writes `shots.json`):
 - **Hook in the first 1-3 seconds**, in the channel's own format. Do NOT reuse another
-  channel's title format. Three hook variants are written and the user picks one.
+  channel's title format. Hook alternatives are listed in `script.md`; the first is
+  used by default.
 - **Structure:** hook -> why it feels hard (myth) -> 2-3 simple steps -> payoff that
   loops back to the hook.
 - **Length:** 30-60 seconds, no filler.
@@ -237,19 +258,20 @@ Script rules (applied when Claude writes `shots.json`):
   income, health or medical guarantees; keep medical, legal and financial topics
   cautious.
 
-Lint (warnings only, except unknown names):
-- hook shot longer than 3.0s
-- any gap over 3.0s with no shot change
-- total duration outside 20-75s
-- first shot role is not `hook`
-- unknown `character.action`, `transition`, `camera`, `sfx`, or music mood (error)
+Two checks, both inside the one command:
+- **`validate` (before any slow work):** unknown `character.action`, `transition`,
+  `camera`, `sfx`, `icon` or music mood names are errors, so mistakes show up in
+  seconds, not after a render.
+- **`check` (after render), warnings only:** hook shot longer than 3.0s; any gap over
+  3.0s with no shot change; total duration outside 20-75s; first shot role is not
+  `hook`; stalled stretches (near-identical consecutive frames); captions outside the
+  safe zone; character off-screen; placeholder title cards used.
 
-## 12. Visual QA
+## 12. Report
 
-After rendering, `qa` samples frames (about 1 per second) and runs mechanical checks:
-stalled stretches (near-identical consecutive frames), captions outside the safe zone,
-character off-screen, placeholder images used. It writes a report and a contact sheet
-to `out/qa/`. Claude can review the contact sheet on request.
+`check` writes one short `out/report.md` listing any warnings and which images came
+from where, plus a contact sheet of sampled frames. Claude can review the contact sheet
+on request. A clean video has an empty warnings list.
 
 ## 13. Posting kit
 
@@ -264,21 +286,22 @@ automatically. Nothing is posted automatically.
 - Whisper failure or empty transcript: stop at `transcribe`.
 - A shot whose text cannot be matched: stop at `align`, listing shot ids and best
   candidates. The user re-records, edits `shots.json`, or hand-edits `timeline.json`
-  and re-runs from `assets` or `render`.
-- No image found and generation unavailable: placeholder plus a warning, never a crash.
+  and re-runs from `images` or `render`.
+- No image found: icon, then title card, plus a warning; never a crash.
 - Missing music/SFX files: render without them and warn.
-- Lint warnings never block rendering; unknown names do.
+- `check` warnings never block rendering; unknown names (`validate`) do.
 - Render failure: show the Remotion error output unchanged.
 
 ## 15. Testing
 
 - `prep`: fixture clip; silence shortened, loudness in target range.
 - `align`: fixtures for exact match, ad-libbed match, unmatched shot, out-of-order shots.
-- `lint`: one test per rule.
-- `assets`: mocked source responses for cache hit, free-source hit, licence rejection,
-  fallback, and placeholder; the log is written correctly in each case.
+- `validate` and `check`: one test per rule.
+- `images`: mocked source responses for own file, cache hit, free-source hit, licence
+  rejection, icon fallback and title card; the log is written correctly in each case.
 - `transcribe`: one smoke test on a short fixture audio file.
-- `qa`: stall check on synthetic frames.
+- `check`: stall check on synthetic frames.
+- `--preview`: renders a fixture video quickly and the pacing matches the full render.
 - Remotion: render a few frames from a fixture `timeline.json`; visual check of the
   character by eye; same seed gives identical frames.
 - End to end: fixture voice-over and `shots.json` produce `final.mp4` that is 1080x1920
@@ -291,23 +314,22 @@ automatically. Nothing is posted automatically.
 3. Captions (rounded outlined font) and big labels.
 4. Photo backgrounds, camera moves and slide transitions.
 5. Gestures, character positioning and props.
-6. `prep` (trim, denoise, normalise).
+6. `validate` and `prep` (trim, denoise, normalise).
 7. `transcribe` (local Whisper, word timestamps).
 8. `align`.
-9. `assets`: free sources, licence log, cutouts, placeholders.
-10. `assets`: generation fallback (verify Higgsfield CLI access first).
-11. `lint`.
-12. Music ducking and SFX.
-13. `make.py` orchestration and end-to-end test.
-14. `qa` and cover export.
-15. Script, shot-list and `kit.md` workflow (checklist, hook variants).
+9. `images`: own file, cache, Wikimedia Commons, icons, title card, cutouts, licence log.
+10. Music ducking and SFX.
+11. `make.py` orchestration with `--preview` and `--setup`, plus the end-to-end test.
+    **This is the first point at which a full video can be made.**
+12. `check` (rules, frame checks, report) and cover export.
+13. Script, shot-list and `kit.md` workflow (checklist, hook alternatives).
 
 Each step ends with something runnable and is its own small commit.
 
 ## 17. Backlog (not in v1)
 
 - Rive/Lottie rig for richer expressions; eye-shape changes (shades are fixed for now).
-- Higgsfield image-to-video clips for special shots.
+- Pexels/Pixabay as extra photo sources (free keys).
 - Batch / series mode.
 - Performance feedback loop: paste in retention stats and tune the rules.
 
@@ -319,8 +341,8 @@ Each step ends with something runnable and is its own small commit.
 - **Tagline** is placeholder copy.
 - **Handles:** @rundownguy looked free on YouTube only; confirm and claim on TikTok,
   Instagram and Shorts before posting.
-- **Higgsfield access** (CLI/API, credits) is unverified.
-- **Pexels/Pixabay keys** are needed for the free-source step.
+- Wikimedia Commons coverage for "how-to" topics may be thin; the icon fallback and
+  the own-image override are the safety net, and Pexels/Pixabay can be added later.
 - Whisper on CPU is assumed fast enough (about 1-2 min for a 1-minute clip).
 - Remotion's current packages and guidance are checked at build time, not assumed.
 - Python 3, Node and ffmpeg are assumed available (verified in step 1).
