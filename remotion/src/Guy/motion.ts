@@ -12,7 +12,8 @@ const GLIDE_SECONDS = 0.25;
 
 const MAX_FACE_X = 28;
 const MAX_TILT = 10;
-const POSITION_X: Record<Position, number> = { left: -0.45, centre: 0, right: 0.45 };
+// +-0.30 keeps the head inside the platform-safe box (see brand.ts SAFE_ZONE).
+const POSITION_X: Record<Position, number> = { left: -0.3, centre: 0, right: 0.3 };
 const TALKING_MOUTHS: MouthShape[] = ['small', 'oh', 'teeth', 'big'];
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));

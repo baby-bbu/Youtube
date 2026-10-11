@@ -12,6 +12,7 @@ import { loudnessAtFrame, loudnessSeries } from './Audio/loudness';
 import { Captions } from './Captions/Captions';
 import { captionGroups } from './Captions/groupWords';
 import { Guy } from './Guy/Guy';
+import { GUY_SCALE, guyLayout } from './Guy/layout';
 import { guyPose } from './Guy/motion';
 import { Label } from './Scene/Label';
 import { Scene } from './Scene/Scene';
@@ -19,8 +20,6 @@ import { slideOffset, transitionFrames } from './Scene/transitions';
 import { parseTimeline, shotAt } from './timeline';
 import type { Timeline, Transition } from './types';
 
-const GUY_SCALE = 1.7;
-const GUY_TOP = 760;
 const LABEL_SECONDS = 1.0;
 
 function incomingStyle(kind: Transition, p: number, width: number): CSSProperties {
@@ -71,8 +70,7 @@ export const Short: React.FC<Timeline> = (rawProps) => {
   const transitioning = index > 0 && transFrames > 0 && framesIntoShot >= 0 && framesIntoShot < transFrames;
 
   const pose = guyPose(tl, t, loudnessAtFrame(series, frame));
-  const guyWidth = 400 * GUY_SCALE;
-  const guyLeft = width / 2 - guyWidth / 2 + pose.x * (width / 2);
+  const guy = guyLayout(pose.x, GUY_SCALE, width);
 
   return (
     <AbsoluteFill style={{ backgroundColor: '#0F0F0F' }}>
@@ -84,7 +82,7 @@ export const Short: React.FC<Timeline> = (rawProps) => {
         <Scene shot={shot} progress={progress} />
       </AbsoluteFill>
       {shot.label && t - shot.start < LABEL_SECONDS && <Label text={shot.label} />}
-      <div style={{ position: 'absolute', left: guyLeft, top: GUY_TOP }}>
+      <div style={{ position: 'absolute', left: guy.left, top: guy.top }}>
         <Guy pose={pose} sticker scale={GUY_SCALE} />
       </div>
       <Captions groups={groups} frame={frame} fps={fps} />

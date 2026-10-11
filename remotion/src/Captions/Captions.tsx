@@ -1,8 +1,7 @@
-import { CAPTION_FONT, COLORS } from '../brand';
+import { CAPTION_BOX, CAPTION_FONT, COLORS, VIDEO } from '../brand';
 import { fitFontSize } from './fitFont';
 import { activeGroup, type CaptionGroup } from './groupWords';
 
-const MAX_WIDTH = 900;
 const BASE_FONT_PX = 120;
 const POP_FRAMES = 4;
 
@@ -21,21 +20,22 @@ export function Captions({ groups, frame, fps }: CaptionsProps) {
     <div
       style={{
         position: 'absolute',
-        top: '72%',
-        left: 0,
-        right: 0,
+        left: CAPTION_BOX.left,
+        width: CAPTION_BOX.width,
+        bottom: VIDEO.height - CAPTION_BOX.bottomY,
         display: 'flex',
         justifyContent: 'center',
+        alignItems: 'flex-end',
       }}
     >
       <div
         style={{
-          maxWidth: MAX_WIDTH,
+          maxWidth: CAPTION_BOX.width,
           textAlign: 'center',
           textTransform: 'lowercase',
           fontFamily: CAPTION_FONT,
           fontWeight: 900,
-          fontSize: fitFontSize(group.text, MAX_WIDTH, BASE_FONT_PX),
+          fontSize: fitFontSize(group.text, CAPTION_BOX.width, BASE_FONT_PX),
           lineHeight: 1.05,
           color: COLORS.white,
           WebkitTextStroke: '16px #000',

@@ -1,7 +1,7 @@
-import { CAPTION_FONT, COLORS } from '../brand';
+import { CAPTION_FONT, COLORS, SAFE_ZONE, safeBox } from '../brand';
 import { fitFontSize } from '../Captions/fitFont';
 
-const MAX_WIDTH = 900;
+const MAX_WIDTH = safeBox().width;
 const BASE_FONT_PX = 220;
 
 /** One big outlined word, centred, for key beats. */
@@ -10,9 +10,9 @@ export function Label({ text }: { text: string }) {
     <div
       style={{
         position: 'absolute',
-        top: '14%',
-        left: 0,
-        right: 0,
+        top: SAFE_ZONE.top + 20,
+        left: SAFE_ZONE.left,
+        width: MAX_WIDTH,
         display: 'flex',
         justifyContent: 'center',
       }}

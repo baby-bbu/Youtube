@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { CAPTION_FONT, COLORS, VIDEO } from './brand';
+import { CAPTION_BOX, CAPTION_FONT, COLORS, SAFE_ZONE, VIDEO, safeBox } from './brand';
 
 describe('brand constants', () => {
   test('colours match the brand sheet', () => {
@@ -18,5 +18,20 @@ describe('brand constants', () => {
   test('caption font is a single string constant', () => {
     expect(typeof CAPTION_FONT).toBe('string');
     expect(CAPTION_FONT.length).toBeGreaterThan(0);
+  });
+
+  test('safe zone is the conservative union of YouTube Shorts, TikTok and Reels margins', () => {
+    expect(SAFE_ZONE).toEqual({ top: 250, bottom: 300, left: 90, right: 180 });
+  });
+
+  test('safeBox is what is left inside the frame', () => {
+    expect(safeBox()).toEqual({ x: 90, y: 250, width: 810, height: 1370 });
+  });
+
+  test('the caption box sits inside the safe box', () => {
+    const box = safeBox();
+    expect(CAPTION_BOX.left).toBeGreaterThanOrEqual(box.x);
+    expect(CAPTION_BOX.left + CAPTION_BOX.width).toBeLessThanOrEqual(box.x + box.width);
+    expect(CAPTION_BOX.bottomY).toBeLessThanOrEqual(box.y + box.height);
   });
 });
