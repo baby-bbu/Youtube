@@ -1,16 +1,18 @@
 import { shotAt, wordAt } from '../timeline';
 import type { GuyPose, MouthShape, Position, Timeline } from '../types';
 
-/** The character picks a new head position this often, giving the snappy stepped feel. */
-export const BEAT_SECONDS = 0.35;
+/** The character picks a new head position this often (slow and gentle). */
+export const BEAT_SECONDS = 1.1;
 /** The mouth changes shape this often while a word is being spoken. */
 const MOUTH_BEAT_SECONDS = 0.12;
 /** Time taken to ease from one head position to the next at the start of a beat. */
-const EASE_SECONDS = 0.12;
+const EASE_SECONDS = 0.7;
 /** Time taken to glide to a new frame position at the start of a shot. */
 const GLIDE_SECONDS = 0.25;
 
 const MAX_FACE_X = 28;
+/** How much of the allowed head turn is actually used; keeps the movement subtle. */
+const TURN_AMOUNT = 0.85;
 const MAX_TILT = 10;
 // +-0.30 keeps the head inside the platform-safe box (see brand.ts SAFE_ZONE).
 const POSITION_X: Record<Position, number> = { left: -0.3, centre: 0, right: 0.3 };
@@ -51,15 +53,15 @@ export function guyPose(tl: Timeline, t: number, loudness: number): GuyPose {
   const beat = Math.floor(t / BEAT_SECONDS);
   const into = t - beat * BEAT_SECONDS;
   const ease = smoothstep(clamp(into / EASE_SECONDS, 0, 1));
-  const targetX = (b: number) => (beatRandom(tl.seed, b, 1) * 2 - 1) * MAX_FACE_X;
+  const targetX = (b: number) => (beatRandom(tl.seed, b, 1) * 2 - 1) * MAX_FACE_X * TURN_AMOUNT;
   const tiltNoise = (b: number) => (beatRandom(tl.seed, b, 2) - 0.5) * 4;
   const faceX = targetX(beat - 1) + (targetX(beat) - targetX(beat - 1)) * ease;
   const noise = tiltNoise(beat - 1) + (tiltNoise(beat) - tiltNoise(beat - 1)) * ease;
   const tilt = clamp((faceX / MAX_FACE_X) * 8 + noise, -MAX_TILT, MAX_TILT);
 
   const pulse = Math.abs(Math.sin((Math.PI * into) / BEAT_SECONDS));
-  let bob = word?.emphasis ? 14 : 4 * pulse;
-  if (shot.character.action === 'bounce') bob += 10 * pulse;
+  let bob = word?.emphasis ? 5 : 1.5 * pulse;
+  if (shot.character.action === 'bounce') bob += 4 * pulse;
 
   let mouth: MouthShape = 'closed';
   if (word) {

@@ -34,7 +34,7 @@
     {"id": 9, "text": "Then say it once more when you leave.", "role": "step",
      "image": {"query": "waving goodbye", "icon": "waving-hand", "cutout": false},
      "character": {"position": "centre", "action": "wave"}, "transition": "slide-right", "camera": "pan-left"},
-    {"id": 10, "text": "Do all three, and you'll blank on names a lot less.", "role": "payoff",
+    {"id": 10, "text": "If you do all three, you'll blank on names a lot less.", "role": "payoff",
      "image": {"query": "checklist done", "icon": "check-mark-button", "cutout": false},
      "character": {"position": "left", "action": "bounce"}, "transition": "whip", "camera": "zoom-in", "sfx": "ding"},
     {"id": 11, "text": "Because now it's stored, not just heard.", "role": "payoff",
