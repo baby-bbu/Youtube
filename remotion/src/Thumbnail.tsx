@@ -44,7 +44,7 @@ export function Thumbnail({ lines, prop = 'nametag', tag = '???', wide }: Thumbn
           <div style={{ ...outlined(165), color: COLORS.ink, WebkitTextStroke: '0px', filter: 'none' }}>{lines[0]}</div>
           <div style={{ ...outlined(165), color: COLORS.white, marginTop: 6 }}>{lines[1]}</div>
         </div>
-        <div style={{ position: 'absolute', left: 70, top: 450, transform: 'rotate(-7deg)', filter: 'drop-shadow(8px 10px 0 rgba(15,15,15,0.28))' }}>
+        <div style={{ position: 'absolute', left: 70, top: 405, transform: 'rotate(-7deg)', filter: 'drop-shadow(8px 10px 0 rgba(15,15,15,0.28))' }}>
           <Prop name={prop} size={250} text={tag} />
         </div>
         <div style={{ position: 'absolute', left: 700, top: 40 }}>
