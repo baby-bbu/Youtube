@@ -255,8 +255,14 @@ audio loudness):
 - **Music and SFX:** one track per video, ducked while the voice speaks; short SFX at
   `sfx` cues and on emphasis words. Only royalty-free or CC0 files, with each file's
   source and licence recorded in its manifest.
-- **Safe zones:** captions and labels stay clear of the platform UI (right-side
-  buttons and bottom description area).
+- **One master file for every platform.** The same `out/final.mp4` is uploaded to
+  YouTube Shorts, TikTok and Instagram Reels (never a re-download from another app, so
+  there is no watermark). Everything on screen (captions, labels, the character's head
+  and feet, title cards) stays inside a conservative union of the three apps' UI
+  margins: top 250 px, bottom 300 px, left 90 px, right 180 px of the 1080x1920 frame,
+  i.e. a safe box of 810x1370 px at (90, 250). These numbers are approximations from
+  public guides, not official specs, so each app's live preview is checked before the
+  first real upload. Implemented in `remotion/src/brand.ts` (`SAFE_ZONE`, `safeBox`).
 
 ## 11. Content rules and checks
 
@@ -282,6 +288,9 @@ Two checks, both inside the one command:
   3.0s with no shot change; total duration outside 20-75s; first shot role is not
   `hook`; stalled stretches (near-identical consecutive frames); captions outside the
   safe zone; character off-screen; placeholder title cards used.
+- **`check` also validates `kit.md`** (section 13). Kit problems are listed as errors at
+  the top of the report and make `make.py` exit non-zero at the end (the video is
+  still rendered), so a video is never posted with a missing or wrong description.
 
 ## 12. Report
 
@@ -291,9 +300,53 @@ on request. A clean video has an empty warnings list.
 
 ## 13. Posting kit
 
-At script time Claude writes `kit.md` (title, caption, hashtags). `render` exports
-`out/cover.png` from the hook frame. Required image attributions are appended
-automatically. Nothing is posted automatically.
+The same video file goes to every platform; only the text differs. At script time,
+alongside `script.md` and `shots.json`, Claude writes `kit.md` from the script (no AI
+service is called while rendering). Layout:
+
+```
+# Kit: <topic>
+
+## YouTube
+Title: <one line>
+Description:
+<line 1: the hook and what the viewer learns>
+<2-4 lines: the steps, one short sentence each>
+Rundown Guy: the quick rundown on anything.
+<3-5 hashtags on the last line>
+Tags: tag one, tag two, ...
+
+## TikTok
+Caption: <hook line> #tag #tag #tag
+
+## Instagram Reels (optional)
+Caption: <hook line> #tag #tag #tag
+
+## Sources
+- <claim in the script> - <URL>
+```
+
+`check` validates it, so the tags and description are always the right shape:
+- **Required sections:** YouTube (title, description, tags), TikTok (caption), Sources.
+- **Limits** (the numbers below are from memory and are re-checked against each
+  platform's current docs when this is built): YouTube title at most 100 characters,
+  description at most 5,000, tags at most 500 characters in total with 5-12 tags;
+  YouTube hashtags 3-5 (YouTube ignores all of them above 15); TikTok caption at most
+  2,200 characters with 3-5 hashtags.
+- **Relevance:** the title, description and tags must each contain at least two of the
+  script's most frequent content words, and the tags must include `rundown guy`, the
+  topic words and two or three broader category words. No duplicate tags, and no tags
+  naming another creator or brand the video is not about.
+- **Honest wording:** no income, health or medical guarantees (a short word list such as
+  "guaranteed", "get rich", "cure" is flagged) and no copy of another channel's title
+  format (for example anything containing "easy, actually").
+- **Sources:** a non-empty Sources section is required whenever the script states
+  facts or advice; an empty one is an error.
+- **Credits:** any image attribution the licence requires is appended automatically to
+  the YouTube description and to the TikTok and Instagram captions.
+
+`render` also exports `out/cover.png` from the hook frame. Nothing is posted
+automatically; the user uploads `out/final.mp4` and pastes each platform's text.
 
 ## 14. Error handling
 
