@@ -5,7 +5,10 @@
   "scripts": {
     "test": "vitest run",
     "still": "remotion still src/index.ts Short out/hello.png",
-    "render": "remotion render src/index.ts Short out/video.mp4"
+    "render": "remotion render src/index.ts Short out/video.mp4",
+    "fixtures": "python3 fixtures/make_fixtures.py",
+    "render:sample": "remotion render src/index.ts Short out/sample.mp4 --props=fixtures/timeline.sample.json",
+    "test:all": "vitest run && python3 -m unittest fixtures/test_make_fixtures.py"
   },
   "dependencies": {
     "@remotion/cli": "4.0.534",

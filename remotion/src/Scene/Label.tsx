@@ -10,7 +10,7 @@ export function Label({ text }: { text: string }) {
     <div
       style={{
         position: 'absolute',
-        top: '40%',
+        top: '14%',
         left: 0,
         right: 0,
         display: 'flex',

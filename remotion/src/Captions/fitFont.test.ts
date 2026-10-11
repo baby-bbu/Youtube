@@ -12,6 +12,12 @@ describe('fitFontSize', () => {
     expect(size).toBeGreaterThanOrEqual(40);
   });
 
+  test('bold capitals are wider than lowercase, so a short all-caps label still shrinks', () => {
+    // "COOKING" at 220px was clipped at the frame edge in the first sample render.
+    expect(fitFontSize('COOKING', 900, 220)).toBeLessThanOrEqual(164);
+    expect(fitFontSize('cooking', 900, 220)).toBe(220);
+  });
+
   test('never goes below the 40px floor even for absurd input', () => {
     expect(fitFontSize('x'.repeat(500), 960, 120)).toBe(40);
   });

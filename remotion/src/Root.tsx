@@ -1,34 +1,30 @@
-import { AbsoluteFill, Composition } from 'remotion';
-import { CAPTION_FONT, COLORS, VIDEO } from './brand';
+import { Composition } from 'remotion';
+import sample from '../fixtures/timeline.sample.json';
+import { Short } from './Short';
+import { parseTimeline } from './timeline';
+import type { Timeline } from './types';
 
-const Placeholder: React.FC = () => (
-  <AbsoluteFill
-    style={{
-      backgroundColor: COLORS.black,
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}
-  >
-    <div
-      style={{
-        color: COLORS.yellow,
-        fontFamily: CAPTION_FONT,
-        fontWeight: 900,
-        fontSize: 140,
-      }}
-    >
-      Rundown Guy
-    </div>
-  </AbsoluteFill>
-);
-
+/**
+ * The composition's props ARE the timeline (the pipeline writes timeline.json and
+ * passes it with --props), so duration and size come straight from it.
+ */
 export const Root: React.FC = () => (
   <Composition
     id="Short"
-    component={Placeholder}
-    durationInFrames={90}
-    fps={VIDEO.fps}
-    width={VIDEO.width}
-    height={VIDEO.height}
+    component={Short}
+    durationInFrames={Math.ceil((sample as unknown as Timeline).duration * sample.fps)}
+    fps={sample.fps}
+    width={sample.width}
+    height={sample.height}
+    defaultProps={sample as unknown as Timeline}
+    calculateMetadata={({ props }) => {
+      const tl = parseTimeline(props);
+      return {
+        durationInFrames: Math.ceil(tl.duration * tl.fps),
+        fps: tl.fps,
+        width: tl.width,
+        height: tl.height,
+      };
+    }}
   />
 );
