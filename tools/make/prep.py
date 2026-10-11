@@ -7,12 +7,18 @@ pauses changes every timestamp.
 import subprocess
 import sys
 
-# keep up to 0.3 s of any pause longer than 0.45 s; leave short natural pauses alone
+# Phone recordings are usually already quiet, so there is NO noise removal (it only adds a
+# watery sound). Instead: remove rumble, thin out muddiness, add clarity and a little
+# brightness, tame harsh s sounds, even out the volume, set loudness.
+# Pauses longer than 0.45 s are shortened to 0.3 s; short natural pauses are left alone.
 FILTERS = ",".join([
-    "highpass=f=80",
-    "afftdn=nr=12:nf=-35",
+    "highpass=f=75",
+    "equalizer=f=250:t=q:w=1:g=-2",
+    "equalizer=f=3200:t=q:w=0.9:g=2.5",
+    "equalizer=f=9000:t=h:w=0.7:g=2",
+    "deesser=i=0.3:m=0.5:f=0.5",
     "silenceremove=stop_periods=-1:stop_duration=0.45:stop_threshold=-45dB:stop_silence=0.3",
-    "acompressor=threshold=-21dB:ratio=3:attack=5:release=80",
+    "acompressor=threshold=-20dB:ratio=2.5:attack=8:release=120:makeup=1",
     "loudnorm=I=-16:TP=-1.5:LRA=9",
 ])
 
