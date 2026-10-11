@@ -35,9 +35,13 @@ can also drop in your own picture for any part.
 
 ## Where things are
 
-- **Done:** the brand (name, look, character) and the design of the tool.
-- **Not built yet:** the tool itself. It gets built in small steps, and a first
-  working video comes early so you can tell me what to change.
+- **Done:** the brand (name, look, character), the design of the tool, and the
+  **video maker**: it draws the finished video (the talking stickman, captions, picture
+  backgrounds and slide transitions) from a hand-written timing file. Try it from the
+  `remotion/` folder: `npm run fixtures` then `npm run render:sample` (full quality, about
+  a minute) or `npm run preview:sample` (fast rough draft, about ten seconds).
+- **Not built yet:** the automatic part: listening to your real voice to work out the
+  timings, finding the pictures, adding music, and the single command that does it all.
 
 ## Still to decide (small things)
 
