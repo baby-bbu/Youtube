@@ -9,7 +9,7 @@
     "fixtures": "python3 fixtures/make_fixtures.py",
     "render:sample": "remotion render src/index.ts Short out/sample.mp4 --props=fixtures/timeline.sample.json",
     "test:all": "vitest run && python3 -m unittest fixtures/test_make_fixtures.py",
-    "preview:sample": "remotion render src/index.ts Short out/preview.mp4 --props=fixtures/timeline.sample.json --scale=0.5 --every-nth-frame=2"
+    "preview:sample": "remotion render src/index.ts Short out/preview.mp4 --props=fixtures/timeline.sample.json --scale=0.5"
   },
   "dependencies": {
     "@remotion/cli": "4.0.534",
