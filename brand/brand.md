@@ -11,7 +11,7 @@ Decided 2026-10-11.
   > Rundown Guy here. You've got better things to do than watch a 20-minute video, so
   > I break things down fast. New skill, quick rundown, done.
 - **Niche:** short-form how-to guides: a simple rundown of how to get good at, or do,
-  something. Vertical 9:16, aimed at 30-60 seconds.
+  something. Vertical 9:16, aimed at about 30 seconds.
 - **Narrator:** the stickman is "the guy". He is the Rundown Guy.
 
 ## Colours
