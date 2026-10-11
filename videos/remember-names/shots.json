@@ -7,7 +7,7 @@
     "Stop forgetting names. Here's the trick."
   ],
   "shots": [
-    {"id": 1, "text": "You forget names the second you hear them.", "role": "hook",
+    {"id": 1, "text": "Why do you forget a name in five seconds?", "role": "hook",
      "image": {"query": "awkward handshake meeting", "icon": "handshake", "cutout": false},
      "character": {"position": "centre", "action": "point"}, "transition": "cut", "camera": "zoom-in", "sfx": "whoosh"},
     {"id": 2, "text": "Most people think they're just bad with names.", "role": "myth",
