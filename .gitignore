@@ -16,3 +16,7 @@ __pycache__/
 # Renderer build output and generated fixtures
 remotion/out/
 remotion/public/fixtures/
+
+# Generated working copies for rendering
+remotion/public/work/
+remotion/out/
