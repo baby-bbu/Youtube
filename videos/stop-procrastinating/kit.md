@@ -1,6 +1,6 @@
 # Kit: how to stop procrastinating
 
-Files: `out/full.mp4` (the video) and `thumbnail.png` (1280x720 thumbnail).
+Files: `out/full.mp4` (the video) and `thumbnail.png` (portrait thumbnail, 1080x1920).
 
 ## YouTube Shorts
 

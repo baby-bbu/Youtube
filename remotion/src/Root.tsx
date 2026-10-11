@@ -1,7 +1,7 @@
 import { Composition } from 'remotion';
 import sample from '../fixtures/timeline.sample.json';
 import { Short } from './Short';
-import { THUMBNAIL_SIZES, Thumbnail, type ThumbnailProps } from './Thumbnail';
+import { THUMBNAIL_SIZE, Thumbnail, type ThumbnailProps } from './Thumbnail';
 import { parseTimeline } from './timeline';
 import type { Timeline } from './types';
 
@@ -33,18 +33,10 @@ export const Root: React.FC = () => (
   />
   <Composition
     id="Thumbnail"
-    component={(p: ThumbnailProps) => <Thumbnail {...p} wide />}
+    component={Thumbnail}
     durationInFrames={1}
     fps={30}
-    {...THUMBNAIL_SIZES.wide}
-    defaultProps={COVER_DEFAULTS}
-  />
-  <Composition
-    id="Cover"
-    component={(p: ThumbnailProps) => <Thumbnail {...p} wide={false} />}
-    durationInFrames={1}
-    fps={30}
-    {...THUMBNAIL_SIZES.tall}
+    {...THUMBNAIL_SIZE}
     defaultProps={COVER_DEFAULTS}
   />
   </>
