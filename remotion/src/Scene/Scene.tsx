@@ -3,6 +3,7 @@ import { CAPTION_FONT, COLORS, SAFE_ZONE, safeBox } from '../brand';
 import { fitFontSize } from '../Captions/fitFont';
 import type { Shot } from '../types';
 import { cameraTransform } from './camera';
+import { SceneView } from './SceneView';
 
 const MAX_WIDTH = safeBox().width;
 /** Title-card text starts here: above the character's head and inside the safe box. */
@@ -48,10 +49,13 @@ type ImageComponent = React.ComponentType<{ src: string; style?: React.CSSProper
 export function Scene({
   shot,
   progress,
+  time = 0,
   Image = Img,
 }: {
   shot: Shot;
   progress: number;
+  /** seconds since the shot started; drives the drawn scene's animation */
+  time?: number;
   Image?: ImageComponent;
 }) {
   const cam = cameraTransform(shot.camera, progress);
@@ -59,7 +63,9 @@ export function Scene({
   return (
     <AbsoluteFill style={{ overflow: 'hidden', backgroundColor: COLORS.black }}>
       <AbsoluteFill style={{ transform }}>
-        {shot.image ? (
+        {shot.scene ? (
+          <SceneView scene={shot.scene} shot={shot} time={time} />
+        ) : shot.image ? (
           <Image
             src={staticFile(shot.image)}
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}

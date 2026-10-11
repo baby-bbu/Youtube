@@ -7,41 +7,511 @@
     "Stop forgetting names. Here's the trick."
   ],
   "shots": [
-    {"id": 1, "text": "Why do you forget a name in five seconds?", "role": "hook",
-     "image": {"query": "handshake", "icon": "handshake", "cutout": false},
-     "character": {"position": "centre", "action": "point"}, "transition": "cut", "camera": "zoom-in", "sfx": "whoosh"},
-    {"id": 2, "text": "Most people think they're just bad with names.", "role": "myth",
-     "image": {"query": "thinking man", "icon": "thinking-face", "cutout": false},
-     "character": {"position": "right", "action": "shrug"}, "transition": "slide-left", "camera": "pan-left"},
-    {"id": 3, "text": "But the truth is, the name never made it into your memory in the first place.", "role": "myth",
-     "image": {"query": "brain", "icon": "brain", "cutout": false},
-     "character": {"position": "left", "action": "point"}, "transition": "slide-right", "camera": "zoom-in"},
-    {"id": 4, "text": "Step one. Say it back right away.", "role": "step",
-     "image": {"query": "friends talking", "icon": "speaking-head", "cutout": false},
-     "character": {"position": "centre", "action": "bounce"}, "transition": "slide-left", "camera": "zoom-out", "sfx": "pop"},
-    {"id": 5, "text": "\"Nice to meet you, Sam.\" That one repeat makes you actually listen.", "role": "step",
-     "image": {"query": "business meeting", "icon": "handshake", "cutout": false},
-     "character": {"position": "right", "action": "wave"}, "transition": "slide-right", "camera": "pan-right"},
-    {"id": 6, "text": "Step two. Picture it.", "role": "step",
-     "image": {"query": "lightbulb idea", "icon": "light-bulb", "cutout": false},
-     "character": {"position": "centre", "action": "bounce"}, "transition": "slide-left", "camera": "zoom-in", "sfx": "pop"},
-    {"id": 7, "text": "Link the name to something you can see, like Sam holding a sandwich.", "role": "step",
-     "image": {"query": "sandwich", "icon": "sandwich", "cutout": false},
-     "character": {"position": "left", "action": "point"}, "transition": "zoom", "camera": "zoom-out"},
-    {"id": 8, "text": "Step three. Use it twice in the first minute.", "role": "step",
-     "image": {"query": "woman talking", "icon": "speech-balloon", "cutout": false},
-     "character": {"position": "right", "action": "bounce"}, "transition": "slide-left", "camera": "zoom-in", "sfx": "pop"},
-    {"id": 9, "text": "Then say it once more when you leave.", "role": "step",
-     "image": {"query": "walking away", "icon": "waving-hand", "cutout": false},
-     "character": {"position": "centre", "action": "wave"}, "transition": "slide-right", "camera": "pan-left"},
-    {"id": 10, "text": "If you do all three, you'll blank on names a lot less.", "role": "payoff",
-     "image": {"query": "checklist", "icon": "check-mark-button", "cutout": false},
-     "character": {"position": "left", "action": "bounce"}, "transition": "whip", "camera": "zoom-in", "sfx": "ding"},
-    {"id": 11, "text": "Because now it's stored, not just heard.", "role": "payoff",
-     "image": {"query": "notebook writing", "icon": "brain", "cutout": false},
-     "character": {"position": "right", "action": "point"}, "transition": "slide-left", "camera": "static"},
-    {"id": 12, "text": "That's the rundown. Next time someone says their name, catch it.", "role": "outro",
-     "image": {"query": "group friends", "icon": "handshake", "cutout": false},
-     "character": {"position": "centre", "action": "wave"}, "transition": "slide-right", "camera": "zoom-out", "sfx": "whoosh"}
+    {
+      "id": 1,
+      "text": "Why do you forget a name in five seconds?",
+      "role": "hook",
+      "character": {
+        "position": "centre",
+        "action": "point"
+      },
+      "transition": "cut",
+      "camera": "zoom-in",
+      "sfx": "whoosh",
+      "scene": {
+        "bg": "sun",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "clock",
+            "x": 0.3,
+            "y": 0.3,
+            "size": 360,
+            "text": "5 SEC",
+            "loop": "wiggle"
+          },
+          {
+            "kind": "prop",
+            "name": "nametag",
+            "x": 0.7,
+            "y": 0.3,
+            "size": 348,
+            "text": "???",
+            "anim": "drop",
+            "at": "word:name",
+            "rot": 8,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "prop",
+            "name": "sparkle",
+            "x": 0.5,
+            "y": 0.2,
+            "size": 110,
+            "anim": "spin",
+            "at": "word:five",
+            "loop": "spin"
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "text": "Most people think they're just bad with names.",
+      "role": "myth",
+      "character": {
+        "position": "right",
+        "action": "shrug"
+      },
+      "transition": "slide-left",
+      "camera": "pan-left",
+      "scene": {
+        "bg": "lilac",
+        "items": [
+          {
+            "kind": "buddy",
+            "side": "left",
+            "hat": "curly",
+            "action": "shrug",
+            "anim": "slide-left",
+            "talking": true
+          },
+          {
+            "kind": "bubble",
+            "text": "I'm just bad\nwith names",
+            "x": 0.46,
+            "y": 0.31,
+            "size": 58,
+            "tail": "left",
+            "at": "word:Most"
+          },
+          {
+            "kind": "prop",
+            "name": "question",
+            "x": 0.2,
+            "y": 0.2,
+            "size": 170,
+            "at": "word:bad",
+            "loop": "wiggle",
+            "rot": -10
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "text": "But the truth is, the name never made it into your memory in the first place.",
+      "role": "myth",
+      "character": {
+        "position": "left",
+        "action": "point"
+      },
+      "transition": "slide-right",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "sky",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "brain",
+            "x": 0.64,
+            "y": 0.3,
+            "size": 408,
+            "loop": "bob"
+          },
+          {
+            "kind": "prop",
+            "name": "nametag",
+            "x": 0.32,
+            "y": 0.31,
+            "size": 252,
+            "text": "SAM",
+            "anim": "slide-left",
+            "at": "word:never",
+            "rot": -12
+          },
+          {
+            "kind": "prop",
+            "name": "xmark",
+            "x": 0.5,
+            "y": 0.31,
+            "size": 170,
+            "at": "word:memory",
+            "loop": "shake"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "text": "Step one. Say it back right away.",
+      "role": "step",
+      "character": {
+        "position": "centre",
+        "action": "bounce"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-out",
+      "sfx": "pop",
+      "scene": {
+        "bg": "mint",
+        "items": [
+          {
+            "kind": "text",
+            "text": "STEP 1",
+            "x": 0.5,
+            "y": 0.19,
+            "size": 190,
+            "colour": "yellow",
+            "rot": -4,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "bubble",
+            "text": "Sam, right?",
+            "x": 0.5,
+            "y": 0.35,
+            "size": 84,
+            "tail": "left",
+            "at": "word:say"
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "text": "\"Nice to meet you, Sam.\" That one repeat makes you actually listen.",
+      "role": "step",
+      "character": {
+        "position": "right",
+        "action": "wave"
+      },
+      "transition": "slide-right",
+      "camera": "pan-right",
+      "scene": {
+        "bg": "coral",
+        "items": [
+          {
+            "kind": "buddy",
+            "side": "left",
+            "hat": "beanie",
+            "action": "idle",
+            "anim": "slide-left",
+            "holds": "sandwich"
+          },
+          {
+            "kind": "bubble",
+            "text": "Nice to meet\nyou, Sam!",
+            "x": 0.5,
+            "y": 0.29,
+            "size": 66,
+            "tail": "right",
+            "at": "word:Nice"
+          },
+          {
+            "kind": "prop",
+            "name": "sparkle",
+            "x": 0.19,
+            "y": 0.52,
+            "size": 120,
+            "anim": "spin",
+            "at": "word:listen",
+            "loop": "pulse"
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "text": "Step two. Picture it.",
+      "role": "step",
+      "character": {
+        "position": "centre",
+        "action": "bounce"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-in",
+      "sfx": "pop",
+      "scene": {
+        "bg": "cream",
+        "items": [
+          {
+            "kind": "text",
+            "text": "STEP 2",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 190,
+            "colour": "yellow",
+            "rot": 3,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "prop",
+            "name": "bulb",
+            "x": 0.5,
+            "y": 0.335,
+            "size": 360,
+            "anim": "drop",
+            "at": "word:Picture",
+            "loop": "pulse"
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "text": "Link the name to something you can see, like Sam holding a sandwich.",
+      "role": "step",
+      "character": {
+        "position": "left",
+        "action": "point"
+      },
+      "transition": "zoom",
+      "camera": "zoom-out",
+      "scene": {
+        "bg": "sun",
+        "items": [
+          {
+            "kind": "text",
+            "text": "SAM +\nSANDWICH",
+            "x": 0.5,
+            "y": 0.21,
+            "size": 118,
+            "rot": -4,
+            "at": "word:Sam",
+            "loop": "wiggle"
+          },
+          {
+            "kind": "buddy",
+            "side": "right",
+            "hat": "beanie",
+            "action": "idle",
+            "anim": "slide-right",
+            "holds": "sandwich"
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "text": "Step three. Use it twice in the first minute.",
+      "role": "step",
+      "character": {
+        "position": "right",
+        "action": "bounce"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-in",
+      "sfx": "pop",
+      "scene": {
+        "bg": "sky",
+        "items": [
+          {
+            "kind": "text",
+            "text": "STEP 3",
+            "x": 0.5,
+            "y": 0.15,
+            "size": 190,
+            "colour": "yellow",
+            "rot": -3,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "prop",
+            "name": "clock",
+            "x": 0.3,
+            "y": 0.34,
+            "size": 324,
+            "text": "1 MIN",
+            "at": "word:first"
+          },
+          {
+            "kind": "text",
+            "text": "x2",
+            "x": 0.7,
+            "y": 0.33,
+            "size": 230,
+            "colour": "yellow",
+            "rot": 8,
+            "at": "word:twice",
+            "loop": "pulse"
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "text": "Then say it once more when you leave.",
+      "role": "step",
+      "character": {
+        "position": "left",
+        "action": "wave"
+      },
+      "transition": "slide-right",
+      "camera": "pan-left",
+      "scene": {
+        "bg": "mint",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "door",
+            "x": 0.8,
+            "y": 0.62,
+            "size": 340
+          },
+          {
+            "kind": "buddy",
+            "side": "right",
+            "hat": "beanie",
+            "action": "wave",
+            "anim": "slide-right"
+          },
+          {
+            "kind": "bubble",
+            "text": "Bye, Sam!",
+            "x": 0.46,
+            "y": 0.3,
+            "size": 84,
+            "tail": "left",
+            "at": "word:say"
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "text": "If you do all three, you'll blank on names a lot less.",
+      "role": "payoff",
+      "character": {
+        "position": "left",
+        "action": "bounce"
+      },
+      "transition": "whip",
+      "camera": "zoom-in",
+      "sfx": "ding",
+      "scene": {
+        "bg": "coral",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "checklist",
+            "x": 0.3,
+            "y": 0.31,
+            "size": 396,
+            "anim": "rise"
+          },
+          {
+            "kind": "text",
+            "text": "ALL 3!",
+            "x": 0.68,
+            "y": 0.28,
+            "size": 160,
+            "colour": "yellow",
+            "rot": 6,
+            "at": "word:all",
+            "loop": "pulse"
+          },
+          {
+            "kind": "prop",
+            "name": "star",
+            "x": 0.84,
+            "y": 0.2,
+            "size": 110,
+            "anim": "spin",
+            "at": "word:three",
+            "loop": "spin"
+          }
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "text": "Because now it's stored, not just heard.",
+      "role": "payoff",
+      "character": {
+        "position": "right",
+        "action": "point"
+      },
+      "transition": "slide-left",
+      "camera": "static",
+      "scene": {
+        "bg": "lilac",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "brain",
+            "x": 0.25,
+            "y": 0.3,
+            "size": 360,
+            "loop": "bob"
+          },
+          {
+            "kind": "prop",
+            "name": "lock",
+            "x": 0.25,
+            "y": 0.35,
+            "size": 150,
+            "at": "word:stored",
+            "anim": "drop"
+          },
+          {
+            "kind": "text",
+            "text": "STORED",
+            "x": 0.62,
+            "y": 0.27,
+            "size": 104,
+            "colour": "yellow",
+            "rot": 5,
+            "at": "word:stored",
+            "loop": "pulse"
+          }
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "text": "That's the rundown. Next time someone says their name, catch it.",
+      "role": "outro",
+      "character": {
+        "position": "right",
+        "action": "wave"
+      },
+      "transition": "slide-right",
+      "camera": "zoom-out",
+      "sfx": "whoosh",
+      "scene": {
+        "bg": "sun",
+        "items": [
+          {
+            "kind": "text",
+            "text": "THE RUNDOWN",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 112,
+            "rot": -2,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "buddy",
+            "side": "left",
+            "hat": "beanie",
+            "action": "wave",
+            "anim": "slide-left"
+          },
+          {
+            "kind": "prop",
+            "name": "nametag",
+            "x": 0.64,
+            "y": 0.32,
+            "size": 324,
+            "text": "SAM",
+            "at": "word:name",
+            "anim": "drop",
+            "rot": -6,
+            "loop": "wiggle"
+          }
+        ]
+      }
+    }
   ]
 }

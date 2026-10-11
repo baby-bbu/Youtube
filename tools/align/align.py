@@ -76,6 +76,8 @@ def align(shots, words, duration):
         }
         if shot.get("label"):
             entry["label"] = shot["label"]
+        if shot.get("scene"):
+            entry["scene"] = shot["scene"]
         if shot.get("sfx"):
             entry["sfx"] = {"name": shot["sfx"], "at": round(start, 2)}
         out.append(entry)

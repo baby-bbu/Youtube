@@ -72,11 +72,11 @@ export const Short: React.FC<Timeline> = (rawProps) => {
   return (
     <AbsoluteFill style={{ backgroundColor: '#0F0F0F' }}>
       <Audio src={staticFile(tl.voice)} />
-      {transitioning && <Scene shot={tl.shots[index - 1]} progress={1} />}
+      {transitioning && <Scene shot={tl.shots[index - 1]} progress={1} time={tl.shots[index - 1].end - tl.shots[index - 1].start} />}
       <AbsoluteFill
         style={transitioning ? incomingStyle(shot.transition, framesIntoShot / transFrames, width) : {}}
       >
-        <Scene shot={shot} progress={progress} />
+        <Scene shot={shot} progress={progress} time={t - shot.start} />
       </AbsoluteFill>
       <div style={{ position: 'absolute', left: guy.left, top: guy.top }}>
         <Guy pose={pose} sticker scale={GUY_SCALE} />
