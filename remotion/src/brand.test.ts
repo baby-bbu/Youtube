@@ -21,11 +21,11 @@ describe('brand constants', () => {
   });
 
   test('safe zone is the conservative union of YouTube Shorts, TikTok and Reels margins', () => {
-    expect(SAFE_ZONE).toEqual({ top: 250, bottom: 300, left: 90, right: 180 });
+    expect(SAFE_ZONE).toEqual({ top: 250, bottom: 300, left: 90, right: 90 });
   });
 
   test('safeBox is what is left inside the frame', () => {
-    expect(safeBox()).toEqual({ x: 90, y: 250, width: 810, height: 1370 });
+    expect(safeBox()).toEqual({ x: 90, y: 250, width: 900, height: 1370 });
   });
 
   test('the caption box sits inside the safe box', () => {
@@ -33,5 +33,10 @@ describe('brand constants', () => {
     expect(CAPTION_BOX.left).toBeGreaterThanOrEqual(box.x);
     expect(CAPTION_BOX.left + CAPTION_BOX.width).toBeLessThanOrEqual(box.x + box.width);
     expect(CAPTION_BOX.bottomY).toBeLessThanOrEqual(box.y + box.height);
+  });
+
+  test('captions and the safe box are centred exactly on the frame (YouTube only)', () => {
+    expect(CAPTION_BOX.left * 2 + CAPTION_BOX.width).toBe(VIDEO.width);
+    expect(SAFE_ZONE.left).toBe(SAFE_ZONE.right);
   });
 });

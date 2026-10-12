@@ -1,0 +1,468 @@
+{
+  "title": "The rundown on how to stop procrastinating",
+  "music_mood": "upbeat",
+  "hook_variants": [
+    "You're not lazy. You just can't start.",
+    "Why can't you just start the thing?",
+    "Stop putting it off. Do this instead."
+  ],
+  "thumbnail": {
+    "lines": [
+      "CAN'T",
+      "START?"
+    ],
+    "prop": "clock",
+    "tag": "2 MIN"
+  },
+  "shots": [
+    {
+      "id": 1,
+      "text": "You're not lazy. You just can't start.",
+      "role": "hook",
+      "character": {
+        "position": "centre",
+        "action": "point"
+      },
+      "transition": "cut",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "coral",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "couch",
+            "x": 0.3,
+            "y": 0.31,
+            "size": 370,
+            "loop": "bob"
+          },
+          {
+            "kind": "text",
+            "text": "NOT\nLAZY",
+            "x": 0.7,
+            "y": 0.27,
+            "size": 130,
+            "colour": "yellow",
+            "rot": 6,
+            "at": "word:not",
+            "loop": "pulse"
+          }
+        ]
+      },
+      "sfx": "whoosh"
+    },
+    {
+      "id": 2,
+      "text": "Most people think they need motivation first.",
+      "role": "myth",
+      "character": {
+        "position": "right",
+        "action": "shrug"
+      },
+      "transition": "slide-left",
+      "camera": "pan-left",
+      "scene": {
+        "bg": "lilac",
+        "items": [
+          {
+            "kind": "buddy",
+            "side": "left",
+            "hat": "curly",
+            "action": "shrug",
+            "anim": "slide-left",
+            "talking": true
+          },
+          {
+            "kind": "bubble",
+            "text": "I need to\nfeel like it",
+            "x": 0.46,
+            "y": 0.31,
+            "size": 58,
+            "tail": "left",
+            "at": "word:Most"
+          },
+          {
+            "kind": "prop",
+            "name": "question",
+            "x": 0.2,
+            "y": 0.19,
+            "size": 190,
+            "at": "word:motivation",
+            "loop": "wiggle",
+            "rot": -10
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "text": "But it works the other way around. Starting is what creates the motivation.",
+      "role": "myth",
+      "character": {
+        "position": "left",
+        "action": "point"
+      },
+      "transition": "slide-right",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "sky",
+        "items": [
+          {
+            "kind": "text",
+            "text": "START",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 170,
+            "colour": "yellow",
+            "rot": -3,
+            "at": "word:Starting",
+            "loop": "wiggle"
+          },
+          {
+            "kind": "prop",
+            "name": "bulb",
+            "x": 0.62,
+            "y": 0.32,
+            "size": 300,
+            "anim": "drop",
+            "at": "word:motivation",
+            "loop": "pulse"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "text": "Step one. Make it tiny.",
+      "role": "step",
+      "character": {
+        "position": "centre",
+        "action": "bounce"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-out",
+      "scene": {
+        "bg": "mint",
+        "items": [
+          {
+            "kind": "text",
+            "text": "STEP 1",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 190,
+            "colour": "yellow",
+            "rot": -4,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "prop",
+            "name": "notebook",
+            "x": 0.5,
+            "y": 0.32,
+            "size": 300,
+            "at": "word:tiny",
+            "anim": "pop",
+            "loop": "bob"
+          }
+        ]
+      },
+      "sfx": "pop"
+    },
+    {
+      "id": 5,
+      "text": "Don't write the essay. Just write one sentence.",
+      "role": "step",
+      "character": {
+        "position": "right",
+        "action": "point"
+      },
+      "transition": "slide-right",
+      "camera": "pan-right",
+      "scene": {
+        "bg": "coral",
+        "items": [
+          {
+            "kind": "buddy",
+            "side": "left",
+            "hat": "party",
+            "action": "idle",
+            "anim": "slide-left",
+            "holds": "notebook"
+          },
+          {
+            "kind": "bubble",
+            "text": "Just ONE\nsentence.",
+            "x": 0.52,
+            "y": 0.29,
+            "size": 66,
+            "tail": "right",
+            "at": "word:Just"
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "text": "Step two. Set a two minute timer.",
+      "role": "step",
+      "character": {
+        "position": "centre",
+        "action": "bounce"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "sky",
+        "items": [
+          {
+            "kind": "text",
+            "text": "STEP 2",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 190,
+            "colour": "yellow",
+            "rot": 3,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "prop",
+            "name": "clock",
+            "x": 0.5,
+            "y": 0.32,
+            "size": 300,
+            "text": "2 MIN",
+            "at": "word:two",
+            "anim": "drop"
+          }
+        ]
+      },
+      "sfx": "pop"
+    },
+    {
+      "id": 7,
+      "text": "Promise yourself you can quit when it rings.",
+      "role": "step",
+      "character": {
+        "position": "left",
+        "action": "shrug"
+      },
+      "transition": "zoom",
+      "camera": "zoom-out",
+      "scene": {
+        "bg": "sun",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "clock",
+            "x": 0.3,
+            "y": 0.31,
+            "size": 330,
+            "text": "DING!",
+            "at": "word:rings",
+            "loop": "shake"
+          },
+          {
+            "kind": "text",
+            "text": "YOU CAN\nQUIT",
+            "x": 0.7,
+            "y": 0.27,
+            "size": 100,
+            "at": "word:quit",
+            "loop": "wiggle"
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "text": "Step three. Put your phone in another room.",
+      "role": "step",
+      "character": {
+        "position": "right",
+        "action": "bounce"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "lilac",
+        "items": [
+          {
+            "kind": "text",
+            "text": "STEP 3",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 190,
+            "colour": "yellow",
+            "rot": -3,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "prop",
+            "name": "phone",
+            "x": 0.5,
+            "y": 0.32,
+            "size": 300,
+            "at": "word:phone",
+            "anim": "drop",
+            "loop": "wiggle"
+          }
+        ]
+      },
+      "sfx": "pop"
+    },
+    {
+      "id": 9,
+      "text": "Out of sight, out of mind.",
+      "role": "step",
+      "character": {
+        "position": "left",
+        "action": "wave"
+      },
+      "transition": "slide-right",
+      "camera": "pan-left",
+      "scene": {
+        "bg": "mint",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "door",
+            "x": 0.9,
+            "y": 0.62,
+            "size": 380
+          },
+          {
+            "kind": "buddy",
+            "side": "right",
+            "hat": "beanie",
+            "action": "wave",
+            "anim": "slide-right",
+            "holds": "phone"
+          },
+          {
+            "kind": "bubble",
+            "text": "Bye, phone!",
+            "x": 0.46,
+            "y": 0.3,
+            "size": 80,
+            "tail": "left",
+            "at": "word:sight"
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "text": "Do all three, and starting gets a lot easier.",
+      "role": "payoff",
+      "character": {
+        "position": "left",
+        "action": "bounce"
+      },
+      "transition": "whip",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "coral",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "checklist",
+            "x": 0.27,
+            "y": 0.31,
+            "size": 340,
+            "anim": "rise"
+          },
+          {
+            "kind": "text",
+            "text": "EASIER!",
+            "x": 0.66,
+            "y": 0.28,
+            "size": 120,
+            "colour": "yellow",
+            "rot": 6,
+            "at": "word:easier",
+            "loop": "pulse"
+          }
+        ]
+      },
+      "sfx": "ding"
+    },
+    {
+      "id": 11,
+      "text": "Because the hardest part is the first two minutes.",
+      "role": "payoff",
+      "character": {
+        "position": "right",
+        "action": "point"
+      },
+      "transition": "slide-left",
+      "camera": "static",
+      "scene": {
+        "bg": "lilac",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "clock",
+            "x": 0.28,
+            "y": 0.33,
+            "size": 320,
+            "text": "2 MIN"
+          },
+          {
+            "kind": "text",
+            "text": "HARDEST\nPART",
+            "x": 0.66,
+            "y": 0.27,
+            "size": 100,
+            "colour": "yellow",
+            "rot": 5,
+            "at": "word:hardest",
+            "loop": "pulse"
+          }
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "text": "That's the rundown. Next time you're stalling, start small.",
+      "role": "outro",
+      "character": {
+        "position": "right",
+        "action": "wave"
+      },
+      "transition": "slide-right",
+      "camera": "zoom-out",
+      "scene": {
+        "bg": "sun",
+        "items": [
+          {
+            "kind": "text",
+            "text": "THE RUNDOWN",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 112,
+            "rot": -2,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "buddy",
+            "side": "left",
+            "hat": "beanie",
+            "action": "wave",
+            "anim": "slide-left"
+          },
+          {
+            "kind": "prop",
+            "name": "check",
+            "x": 0.66,
+            "y": 0.33,
+            "size": 260,
+            "at": "word:start",
+            "anim": "pop",
+            "loop": "wiggle"
+          }
+        ]
+      },
+      "sfx": "whoosh"
+    }
+  ]
+}

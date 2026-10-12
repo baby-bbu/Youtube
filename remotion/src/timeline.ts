@@ -1,9 +1,18 @@
 import {
   ACTIONS,
+  BGS,
   CAMERAS,
+  ENTRANCES,
+  HATS,
+  LOOPS,
+  PROP_NAMES,
+  SIDES,
+  TEXT_COLOURS,
   POSITIONS,
   ROLES,
   TRANSITIONS,
+  type Scene,
+  type SceneItem,
   type Shot,
   type Timeline,
   type Word,
@@ -53,6 +62,56 @@ function parseWord(raw: unknown, ctx: string): Word {
   return { word, start, end, emphasis: raw.emphasis === true };
 }
 
+function parseAt(v: unknown, ctx: string): number | string | undefined {
+  if (v === undefined) return undefined;
+  if (typeof v === 'number' && Number.isFinite(v) && v >= 0) return v;
+  if (typeof v === 'string' && v.startsWith('word:') && v.length > 5) return v;
+  throw new TimelineError(`${ctx}: "at" must be seconds (0 or more) or "word:<text>"`);
+}
+
+function parseItem(raw: unknown, ctx: string): SceneItem {
+  if (!isObj(raw)) throw new TimelineError(`${ctx}: scene item must be an object`);
+  const kind = oneOf(['prop', 'text', 'bubble', 'buddy'] as const, raw.kind, 'item kind', ctx);
+  const base: { at?: number | string; anim?: (typeof ENTRANCES)[number]; loop?: (typeof LOOPS)[number]; rot?: number } = {};
+  const at = parseAt(raw.at, ctx);
+  if (at !== undefined) base.at = at;
+  if (raw.anim !== undefined) base.anim = oneOf(ENTRANCES, raw.anim, 'entrance', ctx);
+  if (raw.loop !== undefined) base.loop = oneOf(LOOPS, raw.loop, 'loop', ctx);
+  if (raw.rot !== undefined) base.rot = num(raw, 'rot', ctx);
+  if (kind === 'buddy') {
+    const item: SceneItem = {
+      ...base,
+      kind,
+      side: oneOf(SIDES, raw.side, 'side', ctx),
+      hat: oneOf(HATS, raw.hat ?? 'none', 'hat', ctx),
+      action: oneOf(ACTIONS, raw.action ?? 'idle', 'action', ctx),
+    };
+    if (raw.holds !== undefined) item.holds = oneOf(PROP_NAMES, raw.holds, 'prop', ctx);
+    if (raw.talking === true) item.talking = true;
+    return item;
+  }
+  const x = num(raw, 'x', ctx);
+  const y = num(raw, 'y', ctx);
+  const size = num(raw, 'size', ctx);
+  if (kind === 'prop') {
+    const item: SceneItem = { ...base, kind, name: oneOf(PROP_NAMES, raw.name, 'prop', ctx), x, y, size };
+    if (typeof raw.text === 'string') item.text = raw.text;
+    return item;
+  }
+  if (kind === 'text') {
+    const item: SceneItem = { ...base, kind, text: str(raw, 'text', ctx), x, y, size };
+    if (raw.colour !== undefined) item.colour = oneOf(TEXT_COLOURS, raw.colour, 'colour', ctx);
+    return item;
+  }
+  return { ...base, kind, text: str(raw, 'text', ctx), x, y, size, tail: oneOf(SIDES, raw.tail ?? 'left', 'tail', ctx) };
+}
+
+function parseScene(raw: unknown, ctx: string): Scene {
+  if (!isObj(raw)) throw new TimelineError(`${ctx}: "scene" must be an object`);
+  if (!Array.isArray(raw.items)) throw new TimelineError(`${ctx}: scene "items" must be an array`);
+  return { bg: oneOf(BGS, raw.bg, 'background', ctx), items: raw.items.map((i) => parseItem(i, ctx)) };
+}
+
 function parseShot(raw: unknown, index: number): Shot {
   if (!isObj(raw)) throw new TimelineError(`shot at index ${index} must be an object`);
   const id = num(raw, 'id', `shot at index ${index}`);
@@ -86,6 +145,7 @@ function parseShot(raw: unknown, index: number): Shot {
   };
   if (typeof raw.label === 'string') shot.label = raw.label;
   if (typeof raw.image === 'string') shot.image = raw.image;
+  if (raw.scene !== undefined) shot.scene = parseScene(raw.scene, ctx);
   if (isObj(raw.sfx)) {
     shot.sfx = { name: str(raw.sfx, 'name', ctx), at: num(raw.sfx, 'at', ctx) };
   }

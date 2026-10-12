@@ -35,13 +35,15 @@ can also drop in your own picture for any part.
 
 ## Where things are
 
-- **Done:** the brand (name, look, character), the design of the tool, and the
-  **video maker**: it draws the finished video (the talking stickman, captions, picture
-  backgrounds and slide transitions) from a hand-written timing file. Try it from the
-  `remotion/` folder: `npm run fixtures` then `npm run render:sample` (full quality, about
-  a minute) or `npm run preview:sample` (fast rough draft, about ten seconds).
-- **Not built yet:** the automatic part: listening to your real voice to work out the
-  timings, finding the pictures, adding music, and the single command that does it all.
+- **Done:** the brand, the video maker, and the one-command pipeline. Record a script,
+  drop the recording in the video's folder (`videos/<name>/`), then run
+  `python3 tools/make.py <name>` (add `--preview` for a quick smaller draft). It cleans
+  the voice, removes breaths, finds each word's timing, lines up the drawn scenes, and
+  makes `out/full.mp4` plus a portrait `thumbnail.png`.
+- **Ready to record:** `videos/stop-procrastinating` (made). Ten more scripts are written in
+  `videos/how-to-*/script.md`. They still need their scenes (`shots.json`) before they can
+  be built.
+- **Not built yet:** automatic music and sound effects.
 
 ## Still to decide (small things)
 
