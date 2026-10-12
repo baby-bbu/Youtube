@@ -21,7 +21,7 @@ export type Bg = (typeof BGS)[number];
 
 export const PROP_NAMES = [
   'nametag', 'clock', 'brain', 'bulb', 'sandwich', 'checklist', 'door', 'question',
-  'star', 'xmark', 'check', 'lock', 'notebook', 'sparkle', 'couch', 'phone',
+  'star', 'xmark', 'check', 'lock', 'notebook', 'sparkle', 'couch', 'phone', 'mic',
 ] as const;
 export type PropName = (typeof PROP_NAMES)[number];
 

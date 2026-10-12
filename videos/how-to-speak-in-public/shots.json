@@ -1,0 +1,418 @@
+{
+  "title": "The rundown on speaking in public",
+  "music_mood": "upbeat",
+  "hook_variants": [
+    "Nervous speakers talk too fast.",
+    "Why do you freeze when everyone's watching?",
+    "Speak in public without panicking."
+  ],
+  "thumbnail": {
+    "lines": [
+      "SPEAK",
+      "SLOWER"
+    ],
+    "prop": "mic",
+    "tag": ""
+  },
+  "shots": [
+    {
+      "id": 1,
+      "text": "Nervous speakers talk too fast.",
+      "role": "hook",
+      "character": {
+        "position": "centre",
+        "action": "point"
+      },
+      "transition": "cut",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "coral",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "clock",
+            "x": 0.28,
+            "y": 0.31,
+            "size": 330,
+            "text": "FAST",
+            "loop": "shake"
+          },
+          {
+            "kind": "text",
+            "text": "TOO\nFAST!",
+            "x": 0.7,
+            "y": 0.27,
+            "size": 130,
+            "colour": "yellow",
+            "rot": 6,
+            "at": "word:fast",
+            "loop": "pulse"
+          }
+        ]
+      },
+      "sfx": "whoosh"
+    },
+    {
+      "id": 2,
+      "text": "Most people think they need to sound impressive.",
+      "role": "myth",
+      "character": {
+        "position": "right",
+        "action": "shrug"
+      },
+      "transition": "slide-left",
+      "camera": "pan-left",
+      "scene": {
+        "bg": "lilac",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "mic",
+            "x": 0.28,
+            "y": 0.31,
+            "size": 340,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "text",
+            "text": "SOUND\nSMART?",
+            "x": 0.7,
+            "y": 0.26,
+            "size": 110,
+            "colour": "yellow",
+            "rot": 5,
+            "at": "word:impressive",
+            "loop": "pulse"
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "text": "But the audience just wants to understand you.",
+      "role": "myth",
+      "character": {
+        "position": "right",
+        "action": "point"
+      },
+      "transition": "slide-right",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "sky",
+        "items": [
+          {
+            "kind": "buddy",
+            "side": "left",
+            "hat": "curly",
+            "action": "idle",
+            "anim": "slide-left",
+            "talking": true
+          },
+          {
+            "kind": "bubble",
+            "text": "I just want\nto get it.",
+            "x": 0.48,
+            "y": 0.31,
+            "size": 60,
+            "tail": "left",
+            "at": "word:audience"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "text": "Step one. Slow down.",
+      "role": "step",
+      "character": {
+        "position": "centre",
+        "action": "bounce"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-out",
+      "scene": {
+        "bg": "mint",
+        "items": [
+          {
+            "kind": "text",
+            "text": "STEP 1",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 190,
+            "colour": "yellow",
+            "rot": -4,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "prop",
+            "name": "clock",
+            "x": 0.5,
+            "y": 0.32,
+            "size": 290,
+            "text": "SLOW",
+            "at": "word:slow",
+            "anim": "pop"
+          }
+        ]
+      },
+      "sfx": "pop"
+    },
+    {
+      "id": 5,
+      "text": "Way slower than feels natural.",
+      "role": "step",
+      "character": {
+        "position": "left",
+        "action": "shrug"
+      },
+      "transition": "slide-right",
+      "camera": "pan-right",
+      "scene": {
+        "bg": "sun",
+        "items": [
+          {
+            "kind": "text",
+            "text": "SLOWER",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 200,
+            "colour": "white",
+            "rot": -3,
+            "loop": "pulse"
+          },
+          {
+            "kind": "prop",
+            "name": "couch",
+            "x": 0.5,
+            "y": 0.33,
+            "size": 300,
+            "at": "word:slower",
+            "anim": "drop",
+            "loop": "bob"
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "text": "Step two. Pause instead of saying um.",
+      "role": "step",
+      "character": {
+        "position": "centre",
+        "action": "bounce"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "sky",
+        "items": [
+          {
+            "kind": "text",
+            "text": "STEP 2",
+            "x": 0.5,
+            "y": 0.15,
+            "size": 190,
+            "colour": "yellow",
+            "rot": 3,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "text",
+            "text": "UM",
+            "x": 0.3,
+            "y": 0.32,
+            "size": 170,
+            "at": "word:um"
+          },
+          {
+            "kind": "prop",
+            "name": "xmark",
+            "x": 0.66,
+            "y": 0.32,
+            "size": 210,
+            "at": "word:um",
+            "anim": "pop",
+            "loop": "shake"
+          }
+        ]
+      },
+      "sfx": "pop"
+    },
+    {
+      "id": 7,
+      "text": "A silence feels longer to you than it does to them.",
+      "role": "step",
+      "character": {
+        "position": "right",
+        "action": "point"
+      },
+      "transition": "slide-right",
+      "camera": "static",
+      "scene": {
+        "bg": "lilac",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "clock",
+            "x": 0.28,
+            "y": 0.31,
+            "size": 320,
+            "text": "2 SEC",
+            "at": "word:silence"
+          },
+          {
+            "kind": "bubble",
+            "text": "...",
+            "x": 0.66,
+            "y": 0.3,
+            "size": 110,
+            "tail": "right",
+            "at": "word:longer"
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "text": "Step three. Make one point.",
+      "role": "step",
+      "character": {
+        "position": "centre",
+        "action": "bounce"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "mint",
+        "items": [
+          {
+            "kind": "text",
+            "text": "STEP 3",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 190,
+            "colour": "yellow",
+            "rot": -3,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "prop",
+            "name": "bulb",
+            "x": 0.5,
+            "y": 0.32,
+            "size": 290,
+            "anim": "drop",
+            "at": "word:point",
+            "loop": "pulse"
+          }
+        ]
+      },
+      "sfx": "pop"
+    },
+    {
+      "id": 9,
+      "text": "Say it, show why it matters, and stop.",
+      "role": "step",
+      "character": {
+        "position": "left",
+        "action": "point"
+      },
+      "transition": "whip",
+      "camera": "zoom-out",
+      "scene": {
+        "bg": "coral",
+        "items": [
+          {
+            "kind": "text",
+            "text": "SAY IT.\nSTOP.",
+            "x": 0.5,
+            "y": 0.22,
+            "size": 150,
+            "colour": "white",
+            "rot": -3,
+            "loop": "wiggle"
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "text": "Do all three, and you'll sound calm even if you're not.",
+      "role": "payoff",
+      "character": {
+        "position": "left",
+        "action": "bounce"
+      },
+      "transition": "slide-right",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "sun",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "mic",
+            "x": 0.27,
+            "y": 0.31,
+            "size": 330,
+            "anim": "rise"
+          },
+          {
+            "kind": "text",
+            "text": "CALM!",
+            "x": 0.68,
+            "y": 0.28,
+            "size": 140,
+            "colour": "yellow",
+            "rot": 6,
+            "at": "word:calm",
+            "loop": "pulse"
+          }
+        ]
+      },
+      "sfx": "ding"
+    },
+    {
+      "id": 11,
+      "text": "That's the rundown. Slow down, pause, one point.",
+      "role": "outro",
+      "character": {
+        "position": "right",
+        "action": "wave"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-out",
+      "scene": {
+        "bg": "sun",
+        "items": [
+          {
+            "kind": "text",
+            "text": "THE RUNDOWN",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 112,
+            "rot": -2,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "buddy",
+            "side": "left",
+            "hat": "beanie",
+            "action": "wave",
+            "anim": "slide-left"
+          },
+          {
+            "kind": "prop",
+            "name": "check",
+            "x": 0.66,
+            "y": 0.33,
+            "size": 260,
+            "at": "word:point",
+            "anim": "pop",
+            "loop": "wiggle"
+          }
+        ]
+      },
+      "sfx": "whoosh"
+    }
+  ]
+}

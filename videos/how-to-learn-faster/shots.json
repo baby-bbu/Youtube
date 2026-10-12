@@ -1,0 +1,394 @@
+{
+  "title": "The rundown on how to learn anything faster",
+  "music_mood": "upbeat",
+  "hook_variants": [
+    "You're not slow. You're learning the hard way.",
+    "Why does learning anything take forever?",
+    "Learn anything faster with this."
+  ],
+  "thumbnail": {
+    "lines": [
+      "LEARN",
+      "FASTER"
+    ],
+    "prop": "bulb",
+    "tag": ""
+  },
+  "shots": [
+    {
+      "id": 1,
+      "text": "You're not slow. You're just learning the hard way.",
+      "role": "hook",
+      "character": {
+        "position": "centre",
+        "action": "point"
+      },
+      "transition": "cut",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "coral",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "notebook",
+            "x": 0.28,
+            "y": 0.31,
+            "size": 350,
+            "loop": "bob"
+          },
+          {
+            "kind": "text",
+            "text": "NOT\nSLOW",
+            "x": 0.7,
+            "y": 0.27,
+            "size": 130,
+            "colour": "yellow",
+            "rot": 6,
+            "at": "word:not",
+            "loop": "pulse"
+          }
+        ]
+      },
+      "sfx": "whoosh"
+    },
+    {
+      "id": 2,
+      "text": "Most people think they need hours of study first.",
+      "role": "myth",
+      "character": {
+        "position": "right",
+        "action": "shrug"
+      },
+      "transition": "slide-left",
+      "camera": "pan-left",
+      "scene": {
+        "bg": "lilac",
+        "items": [
+          {
+            "kind": "buddy",
+            "side": "left",
+            "hat": "curly",
+            "action": "shrug",
+            "anim": "slide-left",
+            "talking": true
+          },
+          {
+            "kind": "bubble",
+            "text": "I need hours\nof study first",
+            "x": 0.46,
+            "y": 0.31,
+            "size": 56,
+            "tail": "left",
+            "at": "word:Most"
+          },
+          {
+            "kind": "prop",
+            "name": "clock",
+            "x": 0.8,
+            "y": 0.18,
+            "size": 150,
+            "at": "word:hours",
+            "loop": "wiggle"
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "text": "But watching someone do it isn't the same as doing it.",
+      "role": "myth",
+      "character": {
+        "position": "left",
+        "action": "point"
+      },
+      "transition": "slide-right",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "sky",
+        "items": [
+          {
+            "kind": "text",
+            "text": "WATCHING\nIS NOT\nDOING",
+            "x": 0.5,
+            "y": 0.25,
+            "size": 100,
+            "colour": "yellow",
+            "rot": -3,
+            "at": "word:watching",
+            "loop": "pulse"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "text": "Step one. Pick one tiny piece.",
+      "role": "step",
+      "character": {
+        "position": "centre",
+        "action": "bounce"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-out",
+      "scene": {
+        "bg": "mint",
+        "items": [
+          {
+            "kind": "text",
+            "text": "STEP 1",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 190,
+            "colour": "yellow",
+            "rot": -4,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "text",
+            "text": "ONE TINY\nPIECE",
+            "x": 0.5,
+            "y": 0.32,
+            "size": 110,
+            "at": "word:tiny",
+            "loop": "pulse"
+          }
+        ]
+      },
+      "sfx": "pop"
+    },
+    {
+      "id": 5,
+      "text": "Not the whole skill, just one part.",
+      "role": "step",
+      "character": {
+        "position": "right",
+        "action": "point"
+      },
+      "transition": "slide-right",
+      "camera": "pan-right",
+      "scene": {
+        "bg": "sun",
+        "items": [
+          {
+            "kind": "text",
+            "text": "JUST ONE\nPART",
+            "x": 0.5,
+            "y": 0.24,
+            "size": 130,
+            "colour": "yellow",
+            "rot": -3,
+            "at": "word:just",
+            "loop": "pulse"
+          },
+          {
+            "kind": "prop",
+            "name": "star",
+            "x": 0.8,
+            "y": 0.14,
+            "size": 140,
+            "at": "word:one",
+            "anim": "spin",
+            "loop": "spin"
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "text": "Step two. Practice it right away. Even badly.",
+      "role": "step",
+      "character": {
+        "position": "centre",
+        "action": "bounce"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "coral",
+        "items": [
+          {
+            "kind": "text",
+            "text": "STEP 2",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 190,
+            "colour": "yellow",
+            "rot": 3,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "prop",
+            "name": "notebook",
+            "x": 0.5,
+            "y": 0.32,
+            "size": 290,
+            "at": "word:practice",
+            "anim": "pop",
+            "loop": "wiggle"
+          }
+        ]
+      },
+      "sfx": "pop"
+    },
+    {
+      "id": 7,
+      "text": "Step three. Get feedback.",
+      "role": "step",
+      "character": {
+        "position": "right",
+        "action": "point"
+      },
+      "transition": "slide-right",
+      "camera": "static",
+      "scene": {
+        "bg": "sky",
+        "items": [
+          {
+            "kind": "text",
+            "text": "STEP 3",
+            "x": 0.5,
+            "y": 0.15,
+            "size": 190,
+            "colour": "yellow",
+            "rot": -3,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "buddy",
+            "side": "left",
+            "hat": "beanie",
+            "action": "idle",
+            "anim": "slide-left"
+          },
+          {
+            "kind": "bubble",
+            "text": "Try it\nslower.",
+            "x": 0.5,
+            "y": 0.3,
+            "size": 64,
+            "tail": "left",
+            "at": "word:feedback"
+          }
+        ]
+      },
+      "sfx": "pop"
+    },
+    {
+      "id": 8,
+      "text": "From a person, a recording, anything honest.",
+      "role": "step",
+      "character": {
+        "position": "left",
+        "action": "shrug"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "lilac",
+        "items": [
+          {
+            "kind": "prop",
+            "name": "phone",
+            "x": 0.28,
+            "y": 0.32,
+            "size": 300,
+            "at": "word:recording",
+            "anim": "drop",
+            "loop": "wiggle"
+          },
+          {
+            "kind": "text",
+            "text": "ANYTHING\nHONEST",
+            "x": 0.68,
+            "y": 0.27,
+            "size": 100,
+            "colour": "yellow",
+            "rot": 5,
+            "at": "word:honest",
+            "loop": "pulse"
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "text": "Repeat that loop, and you improve a lot faster.",
+      "role": "payoff",
+      "character": {
+        "position": "centre",
+        "action": "bounce"
+      },
+      "transition": "whip",
+      "camera": "zoom-in",
+      "scene": {
+        "bg": "mint",
+        "items": [
+          {
+            "kind": "text",
+            "text": "REPEAT",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 190,
+            "colour": "yellow",
+            "rot": -3,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "prop",
+            "name": "bulb",
+            "x": 0.5,
+            "y": 0.32,
+            "size": 290,
+            "anim": "drop",
+            "at": "word:faster",
+            "loop": "pulse"
+          }
+        ]
+      },
+      "sfx": "ding"
+    },
+    {
+      "id": 10,
+      "text": "That's the rundown. Small piece, practice, feedback.",
+      "role": "outro",
+      "character": {
+        "position": "right",
+        "action": "wave"
+      },
+      "transition": "slide-left",
+      "camera": "zoom-out",
+      "scene": {
+        "bg": "sun",
+        "items": [
+          {
+            "kind": "text",
+            "text": "THE RUNDOWN",
+            "x": 0.5,
+            "y": 0.17,
+            "size": 112,
+            "rot": -2,
+            "loop": "wiggle"
+          },
+          {
+            "kind": "buddy",
+            "side": "left",
+            "hat": "beanie",
+            "action": "wave",
+            "anim": "slide-left"
+          },
+          {
+            "kind": "prop",
+            "name": "star",
+            "x": 0.66,
+            "y": 0.33,
+            "size": 260,
+            "at": "word:feedback",
+            "anim": "pop",
+            "loop": "wiggle"
+          }
+        ]
+      },
+      "sfx": "whoosh"
+    }
+  ]
+}

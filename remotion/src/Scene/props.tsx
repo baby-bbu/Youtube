@@ -153,6 +153,16 @@ const DRAW: Record<PropName, (p: DrawProps) => ReactNode> = {
       <text x="140" y="35" textAnchor="middle" fontFamily={CAPTION_FONT} fontWeight={900} fontSize="20" fill="#fff" stroke="none">9</text>
     </g>
   ),
+  mic: () => (
+    <g {...line}>
+      <path d="M30 70 q-8 30 0 60 M170 70 q8 30 0 60" fill="none" strokeWidth={THIN_PX} />
+      <path d="M46 84 q-6 16 0 32 M154 84 q6 16 0 32" fill="none" strokeWidth={THIN_PX} />
+      <circle cx="100" cy="64" r="44" fill="#9AA0AA" />
+      <path d="M62 50 q38 -14 76 0 M58 68 q42 -12 84 0 M64 86 q36 -10 72 0" fill="none" strokeWidth={THIN_PX} />
+      <rect x="76" y="104" width="48" height="16" rx="6" fill={PAL.red} />
+      <path d="M84 120 h32 l-8 66 q-8 8 -16 0 z" fill="#2A2A2A" />
+    </g>
+  ),
   sparkle: () => (
     <path {...line} d="M100 14 C108 68 132 92 186 100 C132 108 108 132 100 186 C92 132 68 108 14 100 C68 92 92 68 100 14 Z" fill={PAL.yellow} />
   ),
