@@ -57,7 +57,9 @@ def main(name, preview):
     step(1, "Cleaning your voice")
     run([py, "tools/make/prep.py", recording, work / "voice_prep.wav"])
     step(2, "Listening for each word")
-    run([py, "tools/make/transcribe.py", work / "voice_prep.wav", work / "words.json"])
+    prompt = work / "script.txt"
+    prompt.write_text(" ".join(s["text"] for s in json.load(open(shots))["shots"]))
+    run([py, "tools/make/transcribe.py", work / "voice_prep.wav", work / "words.json", prompt])
     step(3, "Removing breaths between words")
     run([py, "tools/make/gate.py", work / "voice_prep.wav", voice])
     step(4, "Lining the scenes up with your voice")
